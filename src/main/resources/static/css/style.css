@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+
+#wrap{
+	width: 1600px;
+	height: 800px;
+	margin: 0 auto;
+	font-family: "나눔고딕";
+}
