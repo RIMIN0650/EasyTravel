@@ -14,6 +14,8 @@
 	
 	<div id="wrap" class="bg-warning">
 	
+	<c:import url="/WEB-INF/jsp/include/header.jsp" />
+	
 	<c:forEach var="region" items="${regionList }" varStatus="status">
 		<div>${region.id }</div>
 		<div>${region.name }</div>
