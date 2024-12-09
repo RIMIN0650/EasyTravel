@@ -16,15 +16,34 @@
 	
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	
-	<c:forEach var="region" items="${regionList }" varStatus="status">
-		<div>${region.id }</div>
-		<div>${region.name }</div>
-	</c:forEach>
-	<section>
-		<div></div>
-	</section>
 	
-	
+	<div>
+		<div class="mt-3 bg-white">
+			<h3 class="mt-5 ml-3">지역별 게시판</h3>
+			
+			<div class="d-flex mt-3 mx-4 justify-content-between">
+				<c:forEach var="region" items="${regionList }" varStatus="status">
+					<div id="region-card" class="text-center text-white ml-3">${region.name }</div>
+				</c:forEach>
+			</div>
+			
+			<div class="d-flex justify-content-center mt-5">
+				<div id="region-preview">
+					<h5 class="my-3 ml-2">부산 후기</h5>
+					<div class="mt-2 ml-4">
+						<b>[1]</b> 부산의 매력을 느낄 수 있는 여행지 탐방기 <br>
+					</div>
+					<div class="mt-2 ml-4">
+						<b>[2]</b> 달음산 자연 속 힐링 여행 후기 <br>
+					</div>
+					<div class="mt-2 ml-4">
+						<b>[3]</b> 부산 바다와 함께한 여행, 최고의 휴식처 <br>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
 	</div>
 	
 	

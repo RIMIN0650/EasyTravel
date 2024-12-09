@@ -1,9 +1,25 @@
 @charset "UTF-8";
 
+header{
+	height:130px;
+}
 
 #wrap{
 	width: 1600px;
-	height: 800px;
+	height: 1200px;
 	margin: 0 auto;
 	font-family: "나눔고딕";
+}
+
+#region-card{
+	background-color: #1263CE;
+	width:80px;
+	height:50px;
+	font-size: 28px;
+}
+
+#region-preview{
+	width: 1400px;
+	height: 500px;
+	border: 1px solid;
 }
