@@ -27,5 +27,10 @@ public class PostController {
 		return "post/main";
 	}
 	
+	@GetMapping("/post/upload")
+	public String uploadPost() {
+		
+		return "post/upload";
+	}
 	
 }

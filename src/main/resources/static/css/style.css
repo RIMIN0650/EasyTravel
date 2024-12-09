@@ -23,3 +23,13 @@ header{
 	height: 500px;
 	border: 1px solid;
 }
+
+
+/*upload.jsp*/
+
+#search-form{
+	width:800px;
+}
+#search-btn{
+	width:70px;
+}
