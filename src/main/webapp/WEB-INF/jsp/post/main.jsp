@@ -12,8 +12,12 @@
 <body>
 	
 	
-	<div id="wrap" class="bg-dark">
+	<div id="wrap" class="bg-warning">
 	
+	<c:forEach var="region" items="${regionList }" varStatus="status">
+		<div>${region.id }</div>
+		<div>${region.name }</div>
+	</c:forEach>
 	<section>
 		<div></div>
 	</section>
