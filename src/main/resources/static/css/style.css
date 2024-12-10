@@ -25,11 +25,22 @@ header{
 }
 
 
-/*upload.jsp*/
+
+
+
+/*post\list.jsp*/
 
 #search-form{
 	width:800px;
 }
 #search-btn{
 	width:70px;
+}
+
+
+
+/*post\upload.jsp*/
+#post-input-form{
+	width:900px;
+	height:600px;
 }

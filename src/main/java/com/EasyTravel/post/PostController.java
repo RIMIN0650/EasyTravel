@@ -27,10 +27,15 @@ public class PostController {
 		return "post/main";
 	}
 	
-	@GetMapping("/post/upload")
-	public String uploadPost() {
+	@GetMapping("/post/list")
+	public String viewPostList() {
 		
-		return "post/upload";
+		return "post/list";
 	}
 	
+	
+	@GetMapping("/post/upload")
+	public String uploadPost() {
+		return "post/upload";
+	}
 }
