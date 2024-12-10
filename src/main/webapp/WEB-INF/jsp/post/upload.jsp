@@ -53,7 +53,38 @@
 	<script>
 		$(document).ready(function(){
 			$("#register_btn").on("click", function(){
-				alert("등록");
+				
+				let regionId = $("#region").val();
+				let userId = 3;
+				let title = $("#title").val();
+				let body = $("#input-text").val();
+				
+				
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/upload"
+					, data:{"regionId":regionId, "userId":userId
+							, "title":title, "body":body}
+					, success:function(data){
+						if(data.result == "success"){
+							alert("등록 성공");
+						} else {
+							alert("등록 실패");
+						}
+					}
+					, error:function(data){
+						alert("등록 실패");
+					}				
+				
+				})
+				
+				
+				
+				
+				
+				
+				
 			});
 			
 			
