@@ -5,8 +5,8 @@ header{
 }
 
 #wrap{
-	width: 1600px;
-	height: 1200px;
+	width: 1400px;
+	height: 1600px;
 	margin: 0 auto;
 	font-family: "나눔고딕";
 }
@@ -42,5 +42,9 @@ header{
 /*post\upload.jsp*/
 #post-input-form{
 	width:900px;
-	height:600px;
+	height:900px;
+}
+
+#input-text{
+	width:710px;
 }

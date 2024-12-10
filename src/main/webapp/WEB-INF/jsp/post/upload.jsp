@@ -18,18 +18,27 @@
 	
 	<section class="d-flex justify-content-center">
 		<div class="mt-5">	
-			<div id="post-input-form" class="bg-info">
-				입력 폼
+			<div id="post-input-form" class="bg-white">
+				<div class="d-flex ml-3 pt-3">
+					<input type="text" class="form-control col-7" placeholder="제목" id="title">
+					<input type="text" class="form-control col-2 ml-5" placeholder="지역" id="region">
+				</div>
+				<div class="mt-5 ml-3">
+					<textarea class="mb-2" placeholder="Detail" rows="20" id="input-text"></textarea>
+				</div>
+				
+				<div class="d-flex justify-content-end my-5">
+					<button type="button" class="btn btn-danger mr-4" id="cancel_btn">취소</button>
+					<button type="button" class="btn btn-info mr-4" id="register_btn">등록</button>
+				</div>
 			</div>
 		</div>
-	
-	
+		
+		
 	</section>
 	
 	
-	
-	
-	
+
 	</div>
 	
 	
@@ -41,7 +50,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 	
 	
-	
+	<script>
+		$(document).ready(function(){
+			$("#register_btn").on("click", function(){
+				alert("등록");
+			});
+			
+			
+			
+			
+		});
+	</script>
 	
 	
 	
