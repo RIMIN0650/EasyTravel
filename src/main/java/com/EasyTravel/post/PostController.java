@@ -1,13 +1,13 @@
 package com.EasyTravel.post;
 
-import org.springframework.ui.Model;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.service.PostService;
 import com.EasyTravel.region.domain.Region;
 
@@ -27,8 +27,14 @@ public class PostController {
 		return "post/main";
 	}
 	
+	// 게시물 리스트 보여주기
 	@GetMapping("/post/list")
-	public String viewPostList() {
+	public String viewPostList(Model model) {
+		
+		List<PostPreview> postPreview = postService.getPostList();
+		
+		model.addAttribute("postPreview", postPreview);
+		
 		
 		return "post/list";
 	}

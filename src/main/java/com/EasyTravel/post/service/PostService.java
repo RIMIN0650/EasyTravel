@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EasyTravel.post.domain.Post;
+import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.repository.PostRepository;
 import com.EasyTravel.region.domain.Region;
 import com.EasyTravel.region.repository.RegionRepository;
@@ -51,7 +52,28 @@ public class PostService {
 	}
 	
 	
+	// 게시물 전체 리스트 가져오기
+	public List<PostPreview> getPostList(){
+		
+		List<Post> postList = postRepository.findAll();
+		
+		List<PostPreview> postPreviewList = new ArrayList<>();
+		
+		for(Post post:postList) {
+			PostPreview postPreview = PostPreview.builder()
+											.id(post.getId())
+											.regionId(post.getRegionId())
+											.userId(post.getUserId())
+											.title(post.getTitle())
+											.recCount(post.getRecCount())
+											.viewCount(post.getViewCount())
+											.build();
+			
+			postPreviewList.add(postPreview);
+		}
+		return postPreviewList;
+	}
 	
-	
+
 	
 }

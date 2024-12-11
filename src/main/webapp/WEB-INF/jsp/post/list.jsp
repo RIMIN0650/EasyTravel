@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+c<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 <body>
 	
 	
-	<div id="wrap" class="bg-warning">
+	<div id="wrap" class="bg-white">
 	
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
@@ -22,9 +22,9 @@
 			
 			<h2 class="ml-3 mt-3"> &#8251 여행 일정 추천 - 부산</h2>
 			
-			<div class="d-flex justify-content-center">
+			<div class="d-flex justify-content-center mt-5 mb-3">
 				<div id="search-form" class="d-flex">
-					<input type="text" class="form-control">
+					<input type="text" class="form-control mr-2">
 					<button type="button" id="search-btn" class="btn btn-info">검색</button>
 				</div>
 				
@@ -45,35 +45,26 @@
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
-						<th>추천수</th>
+						<th>사용자</th>
 						<th>조회수</th>
+						<th>추천수</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>4</td>
-						<td>부산 꿀팁</td>
-						<td>0</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>부산 분좋카</td>
-						<td>4</td>
-						<td>13</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>부산 맛집 투어</td>
-						<td>12</td>
-						<td>46</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>부산의 숨겨진 여행지!</td>
-						<td>31</td>
-						<td>124</td>
-					</tr>
+					<c:forEach var="list" items="${postPreview }">
+						<tr>
+							<td>${list.id }</td>
+							<td>${list.title }</td>
+							<td>${list.userId }</td>
+							<td>${list.viewCount }</td>
+							<td>${list.recCount }</td>
+							
+						</tr>
+						
+					
+					</c:forEach>
+					
+					
 				</tbody>
 			
 			
