@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숙박 정보</title>
+    <link rel="stylesheet" href="travel_accommodation.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfJZzcVcTMY97UguVpLqbdKoqJhQh1fy4&libraries=places"></script>
+</head>
+<body>
+    <!-- 상단 바 -->
+    <header>
+        <div class="logo">
+            <h1>TravelChatbot</h1>
+        </div>
+        <nav class="nav-links">
+            <button class="nav-button" onclick="showTab('itinerary')">챗봇</button>
+            <button class="nav-button" onclick="showTab('itinerary')">여행일정</button>
+            <button class="nav-button" onclick="window.location.href='accommodation.html'">숙박</button>
+            <button class="nav-button" onclick="showTab('transport')">교통</button>
+            <button class="nav-button" onclick="location.href='board.html'">게시판</button>
+        </nav>
+        <!-- 로그인 버튼 -->
+        <button class="login-btn">로그인</button>
+    </header>
+
+    <!-- 숙박 검색창 -->
+    <div class="search-container">
+        <input type="text" id="search-bar" placeholder="도시명을 입력하세요">
+        <button onclick="searchHotels()">검색</button>
+    </div>
+
+    <!-- 호텔 정보 표시 영역 -->
+    <div id="hotel-list" class="hotel-list"></div>
+
+    <!-- 호텔 상세 정보 모달 -->
+    <div id="hotelModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="hotelName"></h2>
+            <img id="hotelImage" src="" alt="호텔 이미지" />
+            <p id="hotelAddress"></p>
+            <p id="hotelRating"></p>
+            <p id="hotelDescription"></p>
+        </div>
+    </div>
+
+    <script src="accommodation.js"></script>
+</body>
+</html>

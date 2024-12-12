@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <link rel="stylesheet" href="travel_board.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>TravelChatbot</h1>
+        </div>
+        <nav class="nav-links">
+            <button class="nav-button" onclick="location.href='travel.html'">TravelChatbot</button>
+        </nav>
+    </header>
+
+    <div class="board-container">
+        <h2>지역별 게시판</h2>
+        
+        <!-- 지역별 탭 (버튼으로 구현) -->
+        <div class="category-tabs">
+            <button class="tab-button" onclick="showRegion('seoul')">서울</button>
+            <button class="tab-button" onclick="showRegion('incheon')">인천</button>
+            <button class="tab-button" onclick="showRegion('geyonggi')">경기</button>
+            <button class="tab-button" onclick="showRegion('gangwon')">강원</button>
+            <button class="tab-button" onclick="showRegion('busan')">충남</button>
+            <button class="tab-button" onclick="showRegion('busan')">세종</button>
+            <button class="tab-button" onclick="showRegion('busan')">충북</button>
+            <button class="tab-button" onclick="showRegion('busan')">대전</button>
+            <button class="tab-button" onclick="showRegion('busan')">경북</button>
+            <button class="tab-button" onclick="showRegion('busan')">제주</button>
+        </div>
+
+        <!-- 각 지역의 게시판 내용 (각각의 탭에 해당하는 게시글 표시) -->
+        <div class="region-content" id="seoul" style="display: none;">
+            <h3>부산 후기</h3>
+            <p>부산의 매력을 느낄 수 있는 여행지 탐방기</p>
+            <p>달음산 자연 속 힐링 여행 후기</p>
+            <p>부산 바다와 함께한 여행, 최고의 휴식처</p>
+        </div>
+
+        <div class="region-content" id="gyeonggi" style="display: none;">
+            <h3>경기도 후기</h3>
+            <p>경기도에서의 여행 후기 1</p>
+            <p>경기도에서의 여행 후기 2</p>
+            <p>경기도에서의 여행 후기 3</p>
+        </div>
+
+        <div class="region-content" id="daejeon" style="display: none;">
+            <h3>대전 후기</h3>
+            <p>대전에서의 여행 후기 1</p>
+            <p>대전에서의 여행 후기 2</p>
+            <p>대전에서의 여행 후기 3</p>
+        </div>
+
+        <div class="region-content" id="busan" style="display: none;">
+            <h3>부산 후기</h3>
+            <p>부산에서의 여행 후기 1</p>
+            <p>부산에서의 여행 후기 2</p>
+            <p>부산에서의 여행 후기 3</p>
+        </div>
+    </div>
+
+    <script>
+        // 지역 선택 시 해당 지역의 후기만 보여주는 함수
+        function showRegion(region) {
+            // 모든 지역 콘텐츠를 숨김
+            var contents = document.querySelectorAll('.region-content');
+            contents.forEach(function(content) {
+                content.style.display = 'none';
+            });
+
+            // 선택한 지역의 후기 콘텐츠만 표시
+            var selectedRegion = document.getElementById(region);
+            selectedRegion.style.display = 'block';
+        }
+
+        // 기본적으로 서울 지역을 먼저 보여줌
+        showRegion('seoul');
+    </script>
+</body>
+</html>

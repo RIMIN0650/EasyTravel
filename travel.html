@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여행 챗봇</title>
+    <link rel="stylesheet" href="travel.css">
+</head>
+<body>
+    <!-- 상단 바 -->
+    <header>
+        <div class="logo">
+            <h1>TravelChatbot</h1>
+        </div>
+        <nav class="nav-links">
+            <button class="nav-button" onclick="showTab('itinerary')">챗봇</button>
+            <button class="nav-button" onclick="showTab('itinerary')">여행일정</button>
+            <button class="nav-button" onclick="window.location.href='accommodation.html'">숙박</button>
+            <button class="nav-button" onclick="showTab('transport')">교통</button>
+            <button class="nav-button" onclick="location.href='board.html'">게시판</button>
+        </nav>
+        <!-- 로그인 버튼 -->
+        <button class="login-btn">로그인</button>
+    </header>
+
+    <!-- 검색창 아래에 위치 -->
+    <div class="search-container">
+        <input type="text" id="search-bar" placeholder="여행지, 호텔, 음식점 검색...">
+    </div>
+
+    <!-- 메인 화면 -->
+    <div class="main-content">
+        <div id="itinerary" class="tab-content active">
+            <p>여행 일정 내용</p>
+        </div>
+
+        <div id="accommodation" class="tab-content">
+            <p>숙박 정보</p>
+        </div>
+
+        <div id="transport" class="tab-content">
+            <p>교통 정보</p>
+        </div>
+
+        <div id="board" class="tab-content">
+            <p>게시판</p>
+        </div>
+    </div>
+    <!-- 배경 이미지 추가 영역 -->
+    <div class="background-section"></div>
+
+    <!-- 하단 챗봇 대화창 -->
+    <div class="chat-window">
+        <div class="messages" id="messages">
+            <!-- 메시지 내용이 이곳에 표시됩니다. -->
+        </div>
+        <input type="text" id="chat-input" placeholder="챗봇과 대화하기...">
+        <button id="send-btn" onclick="sendMessage()">전송</button>
+    </div>
+
+    <script src="travel.js"></script>
+</body>
+</html>

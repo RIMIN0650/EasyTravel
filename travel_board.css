@@ -1,0 +1,104 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;  /* body 자체의 여백을 없앰 */
+    padding: 0;  /* body 내부 여백을 없앰 */
+    background-color: #f4f4f4;
+}
+
+/* 상단 바 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3b5998;
+    color: white;
+    padding: 10px 20px;
+}
+
+/* 네비게이션 링크 스타일 */
+/* 네비게이션 링크 버튼 스타일 */
+/* 네비게이션 링크 버튼 스타일 */
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0;
+}
+
+/* 버튼 기본 스타일 (마우스를 올리지 않았을 때의 상태) */
+.nav-button {
+    background-color: #3b5998;  /* 배경색을 원래 hover 상태 색상으로 설정 */
+    color: #f4f4f4;  /* 반대색으로 설정 */
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;  /* 부드러운 전환 효과 */
+}
+
+/* 버튼에 마우스를 올렸을 때 hover 효과 */
+.nav-button:hover {
+    background-color: #f4f4f4;  /* 원래 배경색으로 변경 */
+    color: #3b5998;  /* 텍스트 색상도 반대색으로 변경 */
+}
+
+
+
+/* 게시판 콘텐츠 영역 */
+.board-container {
+    padding: 20px 40px; /* 게시판 콘텐츠 영역에 여백을 추가 */
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 20px auto;  /* 게시판에 위 아래 여백을 추가하고, 중앙 정렬 */
+    max-width: 1200px; /* 게시판 콘텐츠 영역의 최대 너비를 설정 */
+}
+
+/* 지역별 탭 버튼 스타일 */
+.category-tabs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tab-button {
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab-button:hover {
+    background-color: #2a4371;
+}
+/* 지역별 후기 콘텐츠 */
+.region-content {
+    display: none;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+/* 번호 매기기 위한 카운터 설정 */
+.region-content h3 {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.region-content p {
+    counter-increment: review-counter;  /* 각 <p> 태그마다 번호 증가 */
+    margin-left: 20px;  /* 왼쪽 여백 */
+    padding-left: 25px;  /* 텍스트와 번호 사이 간격 */
+    position: relative;
+}
+
+.region-content p::before {
+    content: "[" counter(review-counter) "]";  /* 번호를 [1], [2], ... 형식으로 표시 */
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+}
