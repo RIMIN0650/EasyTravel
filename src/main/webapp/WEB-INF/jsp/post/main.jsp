@@ -12,7 +12,7 @@
 <body>
 	
 	
-	<div id="wrap" class="bg-warning">
+	<div id="wrap">
 	
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	
@@ -23,7 +23,7 @@
 			
 			<div class="d-flex mt-3 mx-4 justify-content-between">
 				<c:forEach var="region" items="${regionList }" varStatus="status">
-					<div id="region-card" class="text-center text-white ml-3">${region.name }</div>
+					<div id="region-card" class="text-center ml-3"><a href="#" class="text-white">${region.name }</a></div>
 				</c:forEach>
 			</div>
 			

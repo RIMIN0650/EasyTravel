@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.service.PostService;
 import com.EasyTravel.region.domain.Region;
+import com.EasyTravel.region.service.RegionService;
 
 @Controller
 public class PostController {
 	
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private RegionService regionService;
 	
 	@GetMapping("/post/home")
 	public String managerJoin(Model model) {
@@ -40,8 +44,14 @@ public class PostController {
 	}
 	
 	
+	// 게시물 업로드 페이지
 	@GetMapping("/post/upload")
-	public String uploadPost() {
+	public String uploadPost(Model model) {
+		
+		List<Region> regionList = regionService.getRegionList();
+		
+		model.addAttribute("regionList", regionList);
+		
 		return "post/upload";
 	}
 }

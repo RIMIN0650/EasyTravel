@@ -19,9 +19,14 @@
 	<section class="d-flex justify-content-center">
 		<div class="mt-5">	
 			<div id="post-input-form" class="bg-white">
-				<div class="d-flex ml-3 pt-3">
-					<input type="text" class="form-control col-7" placeholder="제목" id="title">
-					<input type="text" class="form-control col-2 ml-5" placeholder="지역" id="region">
+				<div class="d-flex ml-3 pt-3 justify-content-between">
+					<input type="text" class="form-control col-9" placeholder="제목" id="title">
+					<select class="col-2" id="selectRegion">
+						<c:forEach var="regionList" items="${regionList }">
+							<option value="${regionList.id }">${regionList.name }</option>
+						</c:forEach>
+					</select>
+					
 				</div>
 				<div class="mt-5 ml-3">
 					<textarea class="mb-2" placeholder="Detail" rows="20" id="input-text"></textarea>
@@ -52,14 +57,20 @@
 	
 	<script>
 		$(document).ready(function(){
+			
+			let regionNumber = 0;
+			
+
+			
+			
+			
+			
 			$("#register_btn").on("click", function(){
 				
-				let regionId = $("#region").val();
+				let regionId = regionNumber;
 				let userId = 3;
 				let title = $("#title").val();
 				let body = $("#input-text").val();
-				
-				
 				
 				$.ajax({
 					type:"post"
@@ -79,16 +90,13 @@
 				
 				})
 				
-				
-				
-				
-				
-				
-				
 			});
 			
 			
-			
+			$("#selectRegion").change(function(){
+				let selectMovie = document.getElementById("selectRegion");
+				regionNumber = selectRegion.options[selectRegion.selectedIndex].value;
+			});
 			
 		});
 	</script>

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 header{
-	background-color: #4075BC;
+	background-color: #3B5998;
 	height:130px;
 }
 
@@ -49,5 +49,5 @@ header{
 }
 
 #input-text{
-	width:710px;
+	width:880px;
 }

@@ -34,7 +34,6 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 					  <option value="1">조회수</option>
 					  <option value="2">추천순</option>
 					</select>
-					</select>
 					<button type="button" class="btn btn-success btn-sm	">정렬</button>
 				</div>	
 			</div>
