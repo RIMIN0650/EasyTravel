@@ -23,7 +23,7 @@
 			
 			<div class="d-flex mt-3 mx-4 justify-content-between">
 				<c:forEach var="region" items="${regionList }" varStatus="status">
-					<div id="region-card" class="text-center ml-3"><a href="#" class="text-white">${region.name }</a></div>
+					<div id="region-card" class="text-center ml-3"><a href="/post/list?regionId=${region.id }" class="text-white">${region.name }</a></div>
 				</c:forEach>
 			</div>
 			

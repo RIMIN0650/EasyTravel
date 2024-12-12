@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.service.PostService;
@@ -33,9 +34,11 @@ public class PostController {
 	
 	// 게시물 리스트 보여주기
 	@GetMapping("/post/list")
-	public String viewPostList(Model model) {
+	public String viewPostList(@RequestParam("regionId") int regionId, Model model) {
 		
-		List<PostPreview> postPreview = postService.getPostList();
+		
+		
+		List<PostPreview> postPreview = postService.getPostList(regionId);
 		
 		model.addAttribute("postPreview", postPreview);
 		

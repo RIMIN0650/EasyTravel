@@ -53,9 +53,9 @@ public class PostService {
 	
 	
 	// 게시물 전체 리스트 가져오기
-	public List<PostPreview> getPostList(){
+	public List<PostPreview> getPostList(int regionId){
 		
-		List<Post> postList = postRepository.findAll();
+		List<Post> postList = postRepository.findAllByRegionId(regionId);
 		
 		List<PostPreview> postPreviewList = new ArrayList<>();
 		
