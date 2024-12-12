@@ -16,6 +16,7 @@ spring:
     password: root
   mvc:
     static-path-pattern: /static/**
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: true
