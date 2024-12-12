@@ -36,8 +36,6 @@ public class PostController {
 	@GetMapping("/post/list")
 	public String viewPostList(@RequestParam("regionId") int regionId, Model model) {
 		
-		
-		
 		List<PostPreview> postPreview = postService.getPostList(regionId);
 		
 		Region region = regionService.findRegionName(regionId);
@@ -51,13 +49,20 @@ public class PostController {
 	
 	
 	// 게시물 업로드 페이지
-	@GetMapping("/post/upload")
-	public String uploadPost(Model model) {
+		@GetMapping("/post/upload")
+		public String uploadPost(Model model) {
+			
+			List<Region> regionList = regionService.getRegionList();
+			
+			model.addAttribute("regionList", regionList);
+			
+			return "post/uploadPost";
+		}
 		
-		List<Region> regionList = regionService.getRegionList();
 		
-		model.addAttribute("regionList", regionList);
 		
-		return "post/upload";
+	@GetMapping("/test-abc")
+	public String testHtml() {
+		return "test";
 	}
 }

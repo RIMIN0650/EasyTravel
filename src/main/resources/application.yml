@@ -19,4 +19,5 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-    cache: true
+    cache: false
+    enabled: true

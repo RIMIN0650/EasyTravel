@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+</head>
+<body>
+    <div id="wrap">
+
+        <section class="d-flex justify-content-center">
+            <div class="mt-5">
+                <div id="post-input-form" class="bg-white">
+                    <div class="d-flex ml-3 pt-3 justify-content-between">
+                        <input type="text" class="form-control col-9" placeholder="제목" id="title">
+                        <select class="col-2" id="selectRegion">
+                            <option th:each="region : ${regionList}" th:value="${region.id}" th:text="${region.name}"></option>
+                        </select>
+                    </div>
+                    <div class="mt-5 ml-3">
+                        <textarea class="mb-2" placeholder="Detail" rows="20" id="input-text"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end my-5">
+                        <button type="button" class="btn btn-danger mr-4" id="cancel_btn">취소</button>
+                        <button type="button" class="btn btn-info mr-4" id="register_btn">등록</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            let regionNumber = 0;
+
+            $("#register_btn").on("click", function(){
+                let regionId = regionNumber;
+                let userId = 3;
+                let title = $("#title").val();
+                let body = $("#input-text").val();
+
+                $.ajax({
+                    type: "post",
+                    url: "/post/upload",
+                    data: {"regionId": regionId, "userId": userId, "title": title, "body": body},
+                    success: function(data){
+                        if(data.result == "success"){
+                            alert("등록 성공");
+                        } else {
+                            alert("등록 실패");
+                        }
+                    },
+                    error: function(data){
+                        alert("등록 실패");
+                    }
+                });
+            });
+
+            $("#selectRegion").change(function(){
+                let selectRegion = document.getElementById("selectRegion");
+                regionNumber = selectRegion.options[selectRegion.selectedIndex].value;
+            });
+        });
+    </script>
+</body>
+</html>

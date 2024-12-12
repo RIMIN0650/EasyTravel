@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>List</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 </head>
 <body>
-
+	<div id="wrap" class="bg-white">
+		
+		<div id="post-box">
+			<h2 class="ml-3 mt-3"> &#8251 여행 일정 추천 - <span th:text="${regionName}"></span></h2>
+			<div class="d-flex justify-content-center mt-5 mb-3">
+				<div id="search-form" class="d-flex">
+					<input type="text" class="form-control mr-2">
+					<button type="button" id="search-btn" class="btn btn-info">검색</button>
+				</div>
+				<div id="order-form" class="ml-3">
+					<select name="order" id="order-select">  			
+					  <option value="0">최신순</option>
+					  <option value="1">조회수</option>
+					  <option value="2">추천순</option>
+					</select>
+					<button type="button" class="btn btn-success btn-sm">정렬</button>
+				</div>
+			</div>
+			<table class="table text-center">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>사용자</th>
+						<th>조회수</th>
+						<th>추천수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="list : ${postPreview}">
+						<td th:text="${list.id}"></td>
+						<td th:text="${list.title}"></td>
+						<td th:text="${list.userId}"></td>
+						<td th:text="${list.viewCount}"></td>
+						<td th:text="${list.recCount}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 </body>
 </html>
