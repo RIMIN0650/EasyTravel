@@ -40,8 +40,11 @@ public class PostController {
 		
 		List<PostPreview> postPreview = postService.getPostList(regionId);
 		
-		model.addAttribute("postPreview", postPreview);
+		Region region = regionService.findRegionName(regionId);
 		
+		
+		model.addAttribute("postPreview", postPreview);
+		model.addAttribute("regionName", region.getName());
 		
 		return "post/list";
 	}

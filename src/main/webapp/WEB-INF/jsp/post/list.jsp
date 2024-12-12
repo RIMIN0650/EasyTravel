@@ -20,7 +20,7 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 		
 		<div id="post-box">
 			
-			<h2 class="ml-3 mt-3"> &#8251 여행 일정 추천 - 부산</h2>
+			<h2 class="ml-3 mt-3"> &#8251 여행 일정 추천 - ${regionName }</h2>
 			
 			<div class="d-flex justify-content-center mt-5 mb-3">
 				<div id="search-form" class="d-flex">
