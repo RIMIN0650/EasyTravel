@@ -21,7 +21,7 @@
                     <div class="mt-5 ml-3">
                         <textarea class="mb-2" placeholder="Detail" rows="20" id="input-text"></textarea>
                     </div>
-
+					<p>Username: <span th:text="${session.userName }"></span></p>
                     <div class="d-flex justify-content-end my-5">
                         <button type="button" class="btn btn-danger mr-4" id="cancel_btn">취소</button>
                         <button type="button" class="btn btn-info mr-4" id="register_btn">등록</button>

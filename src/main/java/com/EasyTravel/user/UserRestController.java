@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.EasyTravel.user.domain.User;
 import com.EasyTravel.user.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 public class UserRestController {
 	
@@ -43,13 +46,20 @@ public class UserRestController {
 	
 	// 사용자 로그인
 	@PostMapping("/user/login")
-	public Map<String, String> userLogin(@RequestParam("id") String id, @RequestParam("pw") String pw){
+	public Map<String, String> userLogin(@RequestParam("id") String id, @RequestParam("pw") String pw
+										, HttpServletRequest request){
 		
 		User user = userService.findUser(id, pw);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(user != null) {
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("userId",  user.getId());
+			session.setAttribute("userName",  user.getUserName());
+			
 			resultMap.put("result",  "success");
 		} else {
 			resultMap.put("result",  "fail");
