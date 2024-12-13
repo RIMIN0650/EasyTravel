@@ -49,20 +49,15 @@ public class PostController {
 	
 	
 	// 게시물 업로드 페이지
-		@GetMapping("/post/upload")
-		public String uploadPost(Model model) {
-			
-			List<Region> regionList = regionService.getRegionList();
-			
-			model.addAttribute("regionList", regionList);
-			
-			return "post/uploadPost";
-		}
+	@GetMapping("/post/upload")
+	public String uploadPost(Model model) {
 		
+		List<Region> regionList = regionService.getRegionList();
 		
+		model.addAttribute("regionList", regionList);
 		
-	@GetMapping("/test-abc")
-	public String testHtml() {
-		return "test";
+		return "post/uploadPost";
 	}
+		
+	
 }
