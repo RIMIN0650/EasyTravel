@@ -10,9 +10,13 @@ public class UserController {
 	@RequestMapping("/user/join")
 	public String userJoin() {
 		
-		return "/user/join";
+		return "/user/signup";
 	}
 	
-	
+	@RequestMapping("/user/login")
+	public String userLogin() {
+		
+		return "/user/login";
+	}
 	
 }

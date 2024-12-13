@@ -34,6 +34,8 @@ public class User {
 	@Column(name="userName")
 	private String userName;
 	
+	private String email;
+	
 	private String gender;
 	
 	private int age;
