@@ -12,6 +12,8 @@ public class UserService {
 	@Autowired
 	public UserRepository userRepository;
 	
+	
+	// 사용자 로그인
 	public User addUser(String loginId, String password
 						, String userName, String email) {
 		
@@ -23,10 +25,13 @@ public class UserService {
 						.build();
 		
 		return userRepository.save(user);
-		
-		
-		
 	}
+	
+	public User findUser(String id, String pw) {
+		
+		return userRepository.findByLoginIdAndPassword(id, pw);
+	}
+	
 	
 	
 	

@@ -17,7 +17,7 @@ public class UserRestController {
 	@Autowired
 	public UserService userService;
 	
-	// 사용자 회원가입
+	// 사용자 회원가입 
 	@PostMapping("/user/join")
 	public Map<String, String> userJoin(@RequestParam("loginId") String loginId
 										, @RequestParam("password") String password
@@ -39,5 +39,24 @@ public class UserRestController {
 		
 	}
 	
+	
+	
+	// 사용자 로그인
+	@PostMapping("/user/login")
+	public Map<String, String> userLogin(@RequestParam("id") String id, @RequestParam("pw") String pw){
+		
+		User user = userService.findUser(id, pw);
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if(user != null) {
+			resultMap.put("result",  "success");
+		} else {
+			resultMap.put("result",  "fail");
+		}
+		
+		return resultMap;
+		
+	}
 	
 }

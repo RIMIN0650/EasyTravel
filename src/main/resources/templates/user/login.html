@@ -9,17 +9,60 @@
 <body>
     <div class="login-container">
         <h1>Travel Login</h1>
-        <form>
-            <input type="text" placeholder="Email or Username" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
+        <div>
+            <input type="text" placeholder="Email or Username" required id="identifier">
+            <input type="password" placeholder="Password" required id="password">
+            <button type="submit" id="loginBtn">Login</button>
+        </div>
         <p><a href="forgot_pw">Forgot Password?</a></p>
         <p><a href="signup">Sign Up</a></p>
     </div>
 </body>
 
 
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
+	<script>
+		$(document).ready(function(){
+			
+			$("#loginBtn").on("click", function(){
+				
+				let id = $("#identifier").val();
+				let pw = $("#password").val();
+
+				if(id == ""){
+					alert("id를 입력하세요");
+					return;
+				}
+				
+				if(pw == ""){
+					alert("pw를 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/login"
+					, data:{"id":id, "pw":pw}
+					, success:function(data){
+						if(data.result == "success"){
+							alert("로그인 성공");
+						} else {
+							alert("로그인 실패");
+						}
+					} 
+					, error:function(){
+						alert("로그인 에러");
+					}
+				})
+				
+				
+			});
+			
+			
+			
+		});
+		
+		
+	</script>
 </html>
