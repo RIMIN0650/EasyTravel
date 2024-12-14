@@ -50,35 +50,18 @@ function displayHotels(hotels) {
             <img src="${hotel.photos ? hotel.photos[0].getUrl() : ''}" alt="${hotel.name}">
             <h3>${hotel.name}</h3>
             <p><strong>주소:</strong> ${hotel.formatted_address}</p>
-            <p><strong>가격 수준:</strong> ${getPriceLevel(hotel.price_level)}</p>
             <p><strong>평점:</strong> ${hotel.rating ? hotel.rating : '정보 없음'}</p>
         `;
 
-        // 클릭 시 모달 창 열기
+        // 호텔 항목 클릭 시 네이버 검색으로 이동
         hotelItem.onclick = function() {
-            openHotelModal(hotel);
+            const hotelName = hotel.name;
+            const naverSearchUrl = `https://search.naver.com/search.naver?query=${encodeURIComponent(hotelName)}`;
+            window.open(naverSearchUrl, '_blank');
         };
 
         hotelListContainer.appendChild(hotelItem);
     });
-}
-
-// 가격 수준을 문자열로 변환하는 함수
-function getPriceLevel(priceLevel) {
-    switch (priceLevel) {
-        case 0:
-            return '매우 저렴';
-        case 1:
-            return '저렴';
-        case 2:
-            return '보통';
-        case 3:
-            return '비쌈';
-        case 4:
-            return '매우 비쌈';
-        default:
-            return '정보 없음';
-    }
 }
 
 // 모달 창 열기
