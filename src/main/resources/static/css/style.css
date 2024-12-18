@@ -59,3 +59,15 @@ header{
 #login-form{
 	width:300px;
 }
+
+
+#post-detail-form{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#post-body{
+	width:1000px;
+	height:1200px;
+	border: solid 1px;
+}

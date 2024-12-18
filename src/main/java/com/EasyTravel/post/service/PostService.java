@@ -2,6 +2,7 @@ package com.EasyTravel.post.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,13 @@ public class PostService {
 		return postPreviewList;
 	}
 	
-
+	// 게시물 내용 불러오기
+	public Post getPostDetail(int postId) {
+		Optional<Post> optionalPost = postRepository.findById(postId);
+		
+		Post post = optionalPost.orElse(null);
+		
+		return post;
+	}
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.service.PostService;
 import com.EasyTravel.region.domain.Region;
@@ -59,5 +60,18 @@ public class PostController {
 		return "post/uploadPost";
 	}
 		
+	
+	
+	// 게시물 확인 페이지
+	@GetMapping("/post/view")
+	public String viewPost(@RequestParam("postId") int postId, Model model) {
+		
+		Post post = postService.getPostDetail(postId);
+		
+		model.addAttribute("post", post);
+		
+		return "post/postDetail";
+		
+	}
 	
 }

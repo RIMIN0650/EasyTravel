@@ -39,7 +39,10 @@
 				<tbody>
 					<tr th:each="list : ${postPreview}">
 						<td th:text="${list.id}"></td>
-						<td th:text="${list.title}"></td>
+						<td>
+							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
+
+						</td>
 						<td th:text="${list.userId}"></td>
 						<td th:text="${list.viewCount}"></td>
 						<td th:text="${list.recCount}"></td>
