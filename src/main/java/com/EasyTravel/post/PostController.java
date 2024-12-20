@@ -57,7 +57,7 @@ public class PostController {
 		
 		model.addAttribute("regionList", regionList);
 		
-		return "post/uploadPost";
+		return "post/upload";
 	}
 		
 	
