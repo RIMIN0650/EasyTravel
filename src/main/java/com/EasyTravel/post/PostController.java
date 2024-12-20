@@ -70,7 +70,7 @@ public class PostController {
 		
 		model.addAttribute("post", post);
 		
-		return "post/postDetail";
+		return "post/detail";
 		
 	}
 	
