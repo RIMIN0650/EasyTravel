@@ -59,8 +59,6 @@ public class PostController {
 		
 		return "post/upload";
 	}
-		
-	
 	
 	// 게시물 확인 페이지
 	@GetMapping("/post/view")

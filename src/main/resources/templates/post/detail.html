@@ -20,6 +20,10 @@
 			    <div class="mr-3" th:text="작성일 + '    ' + ${post.createdAt}"></div>
 			    <div class="mr-3" th:text="수정일 + '    ' +${post.updatedAt}"></div>
 		    </div>
+	    		
+	    	<div>
+	    		<button type="button" class="btn btn-info" id="rec-button">추천</button>
+	    	</div>
 	    </div>
 	    
 	    </div>
@@ -40,6 +44,11 @@
 			$("#to-list-button").on("click",function(){
 				location.href="/post/home";
 			});
+			
+			$("#rec-button").on("click", function(){
+				alert("추천 버튼");
+			});
+			
 			
 			
 		});
