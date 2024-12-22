@@ -22,7 +22,7 @@
 		    </div>
 	    		
 	    	<div>
-	    		<button type="button" class="btn btn-info" id="rec-button">추천</button>
+	    		<button type="button" class="btn btn-info" id="rec-button" th:data-post-id="${post.id }">추천</button>
 	    	</div>
 	    </div>
 	    
@@ -46,7 +46,11 @@
 			});
 			
 			$("#rec-button").on("click", function(){
-				alert("추천 버튼");
+				
+				let postId = $(this).data("post-id");
+				
+				alert(postId);
+			
 			});
 			
 			
