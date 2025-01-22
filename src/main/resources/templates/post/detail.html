@@ -49,7 +49,24 @@
 				
 				let postId = $(this).data("post-id");
 				
-				alert(postId);
+				$.ajax({
+					type:"post"
+					, url:"/post/recommend"
+					, data:{"postId":postId}
+					, success:function(data){
+						if(data.result == "success"){
+							alert("추천 성공");
+							location.reload();
+						} else {
+							alert("좋아요 실패");
+						}
+					}
+					, error:function(){
+						alert("좋아요 에러");
+					}
+				})
+				
+				
 			
 			});
 			
