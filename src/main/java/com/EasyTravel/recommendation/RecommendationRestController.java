@@ -23,7 +23,7 @@ public class RecommendationRestController {
 	public Map<String, String> reccomend(@RequestParam("postId") int postId, HttpSession session){
 		int userId = (Integer)session.getAttribute("userId");
 		
-		Recommendation recommendation = recommendationService.addReccomend(postId, userId);
+		Recommendation recommendation = recommendationService.addRecommend(postId, userId);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		

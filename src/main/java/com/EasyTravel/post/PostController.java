@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.service.PostService;
+import com.EasyTravel.recommendation.service.RecommendationService;
 import com.EasyTravel.region.domain.Region;
 import com.EasyTravel.region.service.RegionService;
 
@@ -22,6 +23,9 @@ public class PostController {
 	
 	@Autowired
 	private RegionService regionService;
+	
+	@Autowired
+	private RecommendationService recommendationService;
 	
 	@GetMapping("/post/home")
 	public String managerJoin(Model model) {
@@ -61,15 +65,19 @@ public class PostController {
 	}
 	
 	// 게시물 확인 페이지
+	// 게시물 추천수 조회하기
 	@GetMapping("/post/view")
 	public String viewPost(@RequestParam("postId") int postId, Model model) {
 		
 		Post post = postService.getPostDetail(postId);
+		int recCount = recommendationService.countRecommend(postId);
+		
 		
 		model.addAttribute("post", post);
+		model.addAttribute("recCount", recCount);
 		
 		return "post/detail";
-		
 	}
+	
 	
 }

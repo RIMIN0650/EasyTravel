@@ -7,6 +7,8 @@ import com.EasyTravel.recommendation.domain.Recommendation;
 public interface RecommendationRepository extends JpaRepository<Recommendation, Integer>{
 
 	
+	// 추천수 세기
+	public int countByPostId(int postId);
 	
 	
 	

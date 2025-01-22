@@ -12,7 +12,8 @@ public class RecommendationService {
 	@Autowired
 	private RecommendationRepository recommendationRepository;
 	
-	public Recommendation addReccomend(int postId, int userId) {
+	// 추천하기
+	public Recommendation addRecommend(int postId, int userId) {
 		
 		Recommendation recommendation = Recommendation.builder()
 														.postId(postId)
@@ -23,7 +24,11 @@ public class RecommendationService {
 		
 	}
 	
-	
+	// 추천수 조회하기
+	public int countRecommend(int postId) {
+		
+		return recommendationRepository.countByPostId(postId);
+	}
 	
 	
 }
