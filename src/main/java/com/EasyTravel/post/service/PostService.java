@@ -66,7 +66,6 @@ public class PostService {
 											.regionId(post.getRegionId())
 											.userId(post.getUserId())
 											.title(post.getTitle())
-											.recCount(post.getRecCount())
 											.viewCount(post.getViewCount())
 											.build();
 			

@@ -35,9 +35,6 @@ public class Post {
 	
 	private String body;
 	
-	@Column(name="recCount")
-	private int recCount;
-	
 	@Column(name="viewCount")
 	private int viewCount;
 	
