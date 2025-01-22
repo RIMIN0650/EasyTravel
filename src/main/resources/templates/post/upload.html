@@ -15,6 +15,7 @@
                     <div class="d-flex ml-3 pt-3 justify-content-between">
                         <input type="text" class="form-control col-9" placeholder="제목" id="title">
                         <select class="col-2" id="selectRegion">
+                        	<option value="0">선택</option>
                             <option th:each="region : ${regionList}" th:value="${region.id}" th:text="${region.name}"></option>
                         </select>
                     </div>
@@ -44,7 +45,13 @@
                 let userId = 3;
                 let title = $("#title").val();
                 let body = $("#input-text").val();
-
+				
+                if(regionNumber == 0){
+                	alert("지역을 선택하세요");
+                	return;
+                }
+                
+                
                 $.ajax({
                     type: "post",
                     url: "/post/upload",
