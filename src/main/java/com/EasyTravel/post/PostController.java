@@ -70,7 +70,11 @@ public class PostController {
 	public String viewPost(@RequestParam("postId") int postId, Model model) {
 		
 		Post post = postService.getPostDetail(postId);
+		
 		int recCount = recommendationService.countRecommend(postId);
+		
+		// 게시물 눌렀을 때 해당 id의 게시물 조회수 + 1 해주기
+		postService.addPostViewCount(postId);
 		
 		
 		model.addAttribute("post", post);

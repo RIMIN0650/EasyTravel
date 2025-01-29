@@ -46,9 +46,22 @@ public class PostService {
 						.userId(userId)
 						.title(title)
 						.body(body)
+						.viewCount(0)
 						.build();
 		
+		
+		
 		return postRepository.save(post);
+		
+		// 게시물 조회수를 따로 테이블 만들려고 했는데
+		// regionId, userId, title, body만을 가지고 중복을 구분할 수 없을 것 같아서
+		// 내용까지 완벽히 똑같을 확률은 매우 드물겠지만
+		// 그래도 완벽하게 하기 위해 조회수를 기존 post 테이블의 컬럼으로 추가
+		
+		
+		
+		
+		
 		
 	}
 	
@@ -82,5 +95,23 @@ public class PostService {
 		
 		return post;
 	}
+	
+	
+	public Post addPostViewCount(int postId) {
+		Optional<Post> optionalPost = postRepository.findById(postId);
+		Post post = optionalPost.orElse(null);
+		
+		if(post != null) {
+			post = post.toBuilder()
+						.viewCount(post.getViewCount() + 1)
+						.build();
+			post = postRepository.save(post);
+		}
+		
+		return post;
+	}
+	
+	
+	
 	
 }
