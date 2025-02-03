@@ -31,4 +31,35 @@ public class RecommendationService {
 	}
 	
 	
+	
+	// 추천 삭제하기
+	public boolean deleteRecommend(int postId, int userId) {
+		
+		Recommendation recommendation = recommendationRepository.findByPostIdAndUserId(postId, userId);
+		
+		if(recommendation != null) {
+			recommendationRepository.delete(recommendation);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	// 사용자별 게시물 추천 여부 확인
+	public boolean checkRecommend(int postId, int userId) {
+		
+		Recommendation recommendation = recommendationRepository.findByPostIdAndUserId(postId, userId);
+		
+		if(recommendation != null) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
+	
+	
 }

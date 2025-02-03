@@ -76,9 +76,12 @@ public class PostController {
 		// 게시물 눌렀을 때 해당 id의 게시물 조회수 + 1 해주기
 		postService.addPostViewCount(postId);
 		
-		
+		// 사용자가 특정 게시물 추천 여부 확인
+		boolean checkRecommend = recommendationService.checkRecommend(postId, recCount);
+	
 		model.addAttribute("post", post);
 		model.addAttribute("recCount", recCount);
+		model.addAttribute("checkRecommend",checkRecommend);
 		
 		return "post/detail";
 	}

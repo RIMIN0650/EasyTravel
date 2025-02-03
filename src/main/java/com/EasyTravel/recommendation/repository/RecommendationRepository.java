@@ -10,6 +10,7 @@ public interface RecommendationRepository extends JpaRepository<Recommendation, 
 	// 추천수 세기
 	public int countByPostId(int postId);
 	
-	
+	// 추천 여부 확인
+	public Recommendation findByPostIdAndUserId(int postId, int userId);
 	
 }

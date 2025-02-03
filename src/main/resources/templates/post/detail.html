@@ -22,6 +22,8 @@
 		    </div>
 	    		
 	    	<div>
+	    		<button th:if="${checkRecommend}" class="text-danger rec-btn">추천했음</button>
+				<button th:unless="${checkRecommend}" class="text-danger unrec-btn">추천안했음</button>
 	    		<button type="button" class="btn btn-info" id="rec-button" th:data-post-id="${post.id }">추천</button>
 	    	</div>
 	    </div>
@@ -41,6 +43,17 @@
 	<script>
 	$(document).ready(function(){
 			
+			$(".rec-btn").on("click",function(){
+				alert("추천 했음");
+			})
+			
+			
+			$(".unrec-btn").on("click", function(){
+				alert("추천 안했음");
+			})
+		
+		
+		
 			$("#to-list-button").on("click",function(){
 				location.href="/post/home";
 			});
