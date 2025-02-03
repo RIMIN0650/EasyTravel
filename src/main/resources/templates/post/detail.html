@@ -22,8 +22,8 @@
 		    </div>
 	    		
 	    	<div>
-	    		<button th:if="${checkRecommend}" class="text-danger rec-btn">추천했음</button>
-				<button th:unless="${checkRecommend}" class="text-danger unrec-btn">추천안했음</button>
+	    		<button th:if="${checkRecommend}" class="text-danger unrec-btn" th:data-post-id="${post.id}">추천취소</button>
+				<button th:unless="${checkRecommend}" class="text-danger rec-btn" th:data-post-id="${post.id}">추천</button>
 	    		<button type="button" class="btn btn-info" id="rec-button" th:data-post-id="${post.id }">추천</button>
 	    	</div>
 	    </div>
@@ -41,26 +41,14 @@
 	
 	
 	<script>
-	$(document).ready(function(){
-			
-			$(".rec-btn").on("click",function(){
-				alert("추천 했음"); 
-				// 추천 취소 버튼으로 만들기
-			})
-			
-			
-			$(".unrec-btn").on("click", function(){
-				alert("추천 안했음");
-				// 추천 버튼으로 만들기
-			})
-		
+	$(document).ready(function(){	
 		
 		
 			$("#to-list-button").on("click",function(){
 				location.href="/post/home";
 			});
 			
-			$("#rec-button").on("click", function(){
+			$(".rec-btn").on("click", function(){
 				
 				let postId = $(this).data("post-id");
 				
@@ -72,16 +60,34 @@
 						if(data.result == "success"){
 							location.reload();
 						} else {
-							alert("좋아요 실패");
+							alert("추천 실패");
 						}
 					}
 					, error:function(){
-						alert("좋아요 에러");
+						alert("추천 에러");
+					}
+				})			
+			});
+			
+			$(".unrec-btn").on("click", function(){
+				
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"delete"
+					,url:"/post/deleteRecommend"
+					, data:{"postId":postId}
+					, success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						} else {
+							alert("추천 취소 실패");
+						}
+					}
+					, error:function(){
+						alert("추천 취소 실패");
 					}
 				})
-				
-				
-			
 			});
 			
 			
