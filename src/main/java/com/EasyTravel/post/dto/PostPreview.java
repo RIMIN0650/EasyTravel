@@ -9,7 +9,7 @@ import lombok.Getter;
 public class PostPreview {
 	private int id;
 	private int regionId;
-	private int userId;
+	private String userName;
 	private String title;
 	private int recCount;
 	private int viewCount;

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.service.PostService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 public class PostRestController {
 	
@@ -20,9 +22,11 @@ public class PostRestController {
 	// 지역 게시판 게시물 등록
 	@PostMapping("/post/upload")
 	public Map<String, String> postUpload(@RequestParam("regionId") int regionId
-											, @RequestParam("userId") int userId
 											, @RequestParam("title") String title
-											, @RequestParam("body") String body){
+											, @RequestParam("body") String body
+											, HttpSession session){
+		
+		int userId = (Integer)session.getAttribute("userId");
 		
 		Post post = postService.addPost(regionId, userId, title, body);
 		

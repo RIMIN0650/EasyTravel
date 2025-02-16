@@ -12,6 +12,8 @@ import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.repository.PostRepository;
 import com.EasyTravel.region.domain.Region;
 import com.EasyTravel.region.repository.RegionRepository;
+import com.EasyTravel.user.domain.User;
+import com.EasyTravel.user.repository.UserRepository;
 
 @Service
 public class PostService {
@@ -21,6 +23,8 @@ public class PostService {
 	@Autowired
 	private PostRepository postRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
 	
 	// 새로운 지역 등록
 	public List<Region> getRegionList(){
@@ -57,12 +61,7 @@ public class PostService {
 		// regionId, userId, title, body만을 가지고 중복을 구분할 수 없을 것 같아서
 		// 내용까지 완벽히 똑같을 확률은 매우 드물겠지만
 		// 그래도 완벽하게 하기 위해 조회수를 기존 post 테이블의 컬럼으로 추가
-		
-		
-		
-		
-		
-		
+			
 	}
 	
 	
@@ -74,16 +73,24 @@ public class PostService {
 		List<PostPreview> postPreviewList = new ArrayList<>();
 		
 		for(Post post:postList) {
+			
+			// 여기 post.getUserId()가 안됨
+			
+			int userId = post.getUserId();
+			Optional<User> optionalUser = userRepository.findById(post.getUserId());
+			User user = optionalUser.orElse(null);
+			
 			PostPreview postPreview = PostPreview.builder()
 											.id(post.getId())
 											.regionId(post.getRegionId())
-											.userId(post.getUserId())
+											.userName(user.getUserName())
 											.title(post.getTitle())
 											.viewCount(post.getViewCount())
 											.build();
 			
 			postPreviewList.add(postPreview);
 		}
+		
 		return postPreviewList;
 	}
 	

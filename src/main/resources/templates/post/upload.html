@@ -42,7 +42,6 @@
 
             $("#register_btn").on("click", function(){
                 let regionId = regionNumber;
-                let userId = 3;
                 let title = $("#title").val();
                 let body = $("#input-text").val();
 				
@@ -54,7 +53,7 @@
                 $.ajax({
                     type: "post",
                     url: "/post/upload",
-                    data: {"regionId": regionId, "userId": userId, "title": title, "body": body},
+                    data: {"regionId": regionId, "title": title, "body": body},
                     success: function(data){
                         if(data.result == "success"){
                             alert("등록 성공");
