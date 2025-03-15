@@ -22,7 +22,7 @@
 					  <option value="1">조회수</option>
 					  <option value="2">추천순</option>
 					</select>
-					<button type="button" class="btn btn-success btn-sm">정렬</button>
+					<button type="button" id="order-btn" class="btn btn-success btn-sm">정렬</button>
 				</div>
 			</div>
 			<table class="table text-center">
@@ -59,12 +59,40 @@
 	<script>
 		
 		$(document).ready(function(){
-			console.log("jquery로드 완료");
+		
 			$("#to-main-post-button").on("click", function(){
 				location.href = "/post/home";
 			});
-		
-		
+					
+			// 이전 프로젝트에서는 아래 구문을 써줘야 변경된 값을 받아오는 것이 적용됐는데
+			// 왜 아래를 주석처리 해도 변경된 값을 받아올 수 있을까
+			// 이전 프로젝트에서는 selectPicker를 사용했고
+			// 이번엔 사용하지 않아서 그런가
+			/* $("#order-select").change(function(){
+				let selectOrder = document.getElementById("selectOrder");
+				orderName = selectOrder.options[selectOrder.selectedIndex].value;
+			}); */
+			
+			$("#order-btn").on("click", function(){
+				
+				let selectedValue = $("#order-select").val();
+				
+				if(selectedValue == "0"){
+					alert("최신순");
+					return;
+				}
+				
+				if(selectedValue == "1"){
+					alert("조회순");
+					return;
+				}
+				
+				if(selectedValue == "2"){
+					alert("추천순");
+					return;
+				}
+				
+			})
 	
 	
 		});

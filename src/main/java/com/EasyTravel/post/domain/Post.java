@@ -37,6 +37,9 @@ public class Post {
 	@Column(name="viewCount")
 	private int viewCount;
 	
+	@Column(name="recCount")
+	private int recCount;
+	
 	@Column(name="createdAt", updatable=false)
 	private Date createdAt;
 	

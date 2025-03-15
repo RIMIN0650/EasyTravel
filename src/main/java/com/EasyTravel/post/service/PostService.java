@@ -55,6 +55,7 @@ public class PostService {
 						.title(title)
 						.body(body)
 						.viewCount(0)
+						.recCount(0)
 						.build();
 		
 		
@@ -81,7 +82,7 @@ public class PostService {
 			Optional<User> optionalUser = userRepository.findById(post.getUserId());
 			User user = optionalUser.orElse(null);
 			
-			int recCount = recommendationRepository.countByPostId(post.getId());
+//			int recCount = recommendationRepository.countByPostId(post.getId());
 			
 			PostPreview postPreview = PostPreview.builder()
 											.id(post.getId())
@@ -89,7 +90,7 @@ public class PostService {
 											.userName(user.getUserName())
 											.title(post.getTitle())
 											.viewCount(post.getViewCount())
-											.recCount(recCount)
+											.recCount(post.getRecCount())
 											.build();
 			
 			postPreviewList.add(postPreview);
@@ -97,6 +98,35 @@ public class PostService {
 		
 		return postPreviewList;
 	}
+	
+	
+	// 추천수 많은 순서대로 게시글 불러오기
+	public List<PostPreview> getPostListOrderByRecCount(int regionId){
+		List<Post> postList = postRepository.findAllByRegionIdOrderByRecCountDesc(regionId);
+		
+		List<PostPreview> postPreviewList = new ArrayList<>();
+		
+		for(Post post:postList) {
+			Optional<User> optionalUser = userRepository.findById(post.getUserId());
+			User user = optionalUser.orElse(null);
+			
+//			int recCount = recommendationRepository.countByPostId(post.getId());
+			
+			PostPreview postPreview = PostPreview.builder()
+												.id(post.getId())
+												.regionId(post.getRegionId())
+												.userName(user.getUserName())
+												.title(post.getTitle())
+												.viewCount(post.getViewCount())
+												.recCount(post.getRecCount())
+												.build();
+			
+			postPreviewList.add(postPreview);
+				
+		}
+		return postPreviewList;
+	}
+	
 	
 	// 게시물 내용 불러오기
 	public Post getPostDetail(int postId) {

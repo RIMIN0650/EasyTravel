@@ -11,5 +11,8 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 	// 지역 id와 일치하는 게시물 모두 조회
 	List<Post> findAllByRegionId(int regionId);
 	
+	// 추천수 많은 순서대로 조회하기
+	List<Post> findAllByRegionIdOrderByRecCountDesc(int regionId);
+	
 	
 }
