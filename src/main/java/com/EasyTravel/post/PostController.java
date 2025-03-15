@@ -53,8 +53,6 @@ public class PostController {
 		return "post/list";
 	}
 	
-	
-	
 	// 게시물 리스트 보여주기
 		@GetMapping("/post/list/order/rec")
 		public String viewPostListOrderByRecCount(@RequestParam("regionId") int regionId, Model model) {
