@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.repository.PostRepository;
+import com.EasyTravel.recommendation.repository.RecommendationRepository;
 import com.EasyTravel.region.domain.Region;
 import com.EasyTravel.region.repository.RegionRepository;
 import com.EasyTravel.user.domain.User;
@@ -25,6 +26,9 @@ public class PostService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RecommendationRepository recommendationRepository;
 	
 	// 새로운 지역 등록
 	public List<Region> getRegionList(){
@@ -74,11 +78,10 @@ public class PostService {
 		
 		for(Post post:postList) {
 			
-			// 여기 post.getUserId()가 안됨
-			
-			int userId = post.getUserId();
 			Optional<User> optionalUser = userRepository.findById(post.getUserId());
 			User user = optionalUser.orElse(null);
+			
+			int recCount = recommendationRepository.countByPostId(post.getId());
 			
 			PostPreview postPreview = PostPreview.builder()
 											.id(post.getId())
@@ -86,6 +89,7 @@ public class PostService {
 											.userName(user.getUserName())
 											.title(post.getTitle())
 											.viewCount(post.getViewCount())
+											.recCount(recCount)
 											.build();
 			
 			postPreviewList.add(postPreview);
@@ -104,6 +108,7 @@ public class PostService {
 	}
 	
 	
+	// 게시물 조회수 1 증가시키기
 	public Post addPostViewCount(int postId) {
 		Optional<Post> optionalPost = postRepository.findById(postId);
 		Post post = optionalPost.orElse(null);

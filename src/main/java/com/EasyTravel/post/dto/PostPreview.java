@@ -1,5 +1,7 @@
 package com.EasyTravel.post.dto;
 
+import java.util.Date;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,8 +11,9 @@ import lombok.Getter;
 public class PostPreview {
 	private int id;
 	private int regionId;
-	private String userName;
 	private String title;
-	private int recCount;
+	private String userName;
+	private Date createdAt;
 	private int viewCount;
+	private int recCount;
 }

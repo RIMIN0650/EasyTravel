@@ -15,7 +15,7 @@
             <button type="submit" id="loginBtn">Login</button>
         </div>
         <p><a href="forgot_pw">Forgot Password?</a></p>
-        <p><a href="signup">Sign Up</a></p>
+        <p><a href="join">Sign Up</a></p>
     </div>
 </body>
 
@@ -47,7 +47,7 @@
 					, success:function(data){
 						if(data.result == "success"){
 							alert("로그인 성공");
-							location.href="/post/upload"
+							location.href="/post/home"
 						} else {
 							alert("로그인 실패");
 						}

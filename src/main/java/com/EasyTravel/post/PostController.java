@@ -1,5 +1,6 @@
 package com.EasyTravel.post;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class PostController {
 		
 		
 		model.addAttribute("postPreview", postPreview);
-		model.addAttribute("regionName", region.getName());
+//		model.addAttribute("regionName", region.getName());
 		
 		return "post/list";
 	}
@@ -78,7 +79,7 @@ public class PostController {
 		
 		// 사용자가 특정 게시물 추천 여부 확인
 		boolean checkRecommend = recommendationService.checkRecommend(postId, recCount);
-	
+		
 		model.addAttribute("post", post);
 		model.addAttribute("recCount", recCount);
 		model.addAttribute("checkRecommend",checkRecommend);

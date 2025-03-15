@@ -18,13 +18,12 @@
 		    <div class="d-flex">
 			    <div class="mr-3" th:text="추천수 + '    ' + ${recCount}"></div>
 			    <div class="mr-3" th:text="작성일 + '    ' + ${post.createdAt}"></div>
-			    <div class="mr-3" th:text="수정일 + '    ' +${post.updatedAt}"></div>
 		    </div>
 	    		
 	    	<div>
 	    		<button th:if="${checkRecommend}" class="text-danger unrec-btn" th:data-post-id="${post.id}">추천취소</button>
 				<button th:unless="${checkRecommend}" class="text-danger rec-btn" th:data-post-id="${post.id}">추천</button>
-	    		<button type="button" class="btn btn-info" id="rec-button" th:data-post-id="${post.id }">추천</button>
+	    		
 	    	</div>
 	    </div>
 	    
