@@ -27,8 +27,8 @@ public class PostService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private RecommendationRepository recommendationRepository;
+//	@Autowired
+//	private RecommendationRepository recommendationRepository;
 	
 	// 새로운 지역 등록
 	public List<Region> getRegionList(){
