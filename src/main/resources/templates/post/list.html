@@ -36,11 +36,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="list : ${postPreview}">
+					<tr th:each="list : ${postPreview}" th:data-region-id="|${list.regionId}|">
+
 						<td th:text="${list.id}"></td>
 						<td>
 							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
-
 						</td>
 						<td th:text="${list.userName}"></td>
 						<td th:text="${list.viewCount}"></td>
@@ -60,6 +60,9 @@
 		
 		$(document).ready(function(){
 		
+			const params = new URLSearchParams(window.location.search);
+			const value = params.get('regionId');
+			
 			$("#to-main-post-button").on("click", function(){
 				location.href = "/post/home";
 			});
@@ -77,14 +80,17 @@
 				
 				let selectedValue = $("#order-select").val();
 				
-				if(selectedValue == "0"){
-					alert("최신순");
-					return;
-				}
+				let regionId = value;
+				
+				
+				
+				alert("regionId : " + regionId);
+				
+				
 				
 				if(selectedValue == "1"){
 					alert("조회순");
-					return;
+					
 				}
 				
 				if(selectedValue == "2"){

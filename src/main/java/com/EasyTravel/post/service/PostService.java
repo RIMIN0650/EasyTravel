@@ -122,7 +122,7 @@ public class PostService {
 												.build();
 			
 			postPreviewList.add(postPreview);
-				
+			
 		}
 		return postPreviewList;
 	}

@@ -48,10 +48,29 @@ public class PostController {
 		
 		
 		model.addAttribute("postPreview", postPreview);
-//		model.addAttribute("regionName", region.getName());
+		model.addAttribute("regionName", region.getName());
 		
 		return "post/list";
 	}
+	
+	
+	
+	// 게시물 리스트 보여주기
+		@GetMapping("/post/list/order/rec")
+		public String viewPostListOrderByRecCount(@RequestParam("regionId") int regionId, Model model) {
+			
+			List<PostPreview> postPreview = postService.getPostListOrderByRecCount(regionId);
+			
+			Region region = regionService.findRegionName(regionId);
+			
+			
+			model.addAttribute("postPreview", postPreview);
+			model.addAttribute("regionName", region.getName());
+			
+			return "post/list";
+		}
+	
+	
 	
 	
 	// 게시물 업로드 페이지
