@@ -8,9 +8,8 @@
 </head>
 <body>
 	<div id="wrap" class="bg-white">
-		
 		<div id="post-box">
-			<h2 class="ml-3 mt-3"> &#8251 여행 일정 추천 - <span th:text="${regionName}"></span></h2>
+			<h2 class="ml-3 mt-3"><h1 th:text="${recCount}"></h1> &#8251 여행 일정 추천 - <span th:text="${regionName}"></span></h2>
 			<div class="d-flex justify-content-center mt-5 mb-3">
 				<div id="search-form" class="d-flex">
 					<input type="text" class="form-control mr-2">
@@ -36,6 +35,16 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr th:each="list : ${postPreviewOrderByRecCount}">
+						<td th:text="${list.id}"></td>
+						<td>
+							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
+						</td>
+						<td th:text="${list.userName}" + 1></td>
+						<td th:text="${list.viewCount}"></td>
+						<td th:text="${list.recCount}"></td>
+					</tr>
+				
 					<tr th:each="list : ${postPreview}">
 
 						<td th:text="${list.id}"></td>
@@ -82,27 +91,10 @@
 				
 				let regionId = value;
 				
-				alert("regionId : " + regionId);
-				
-				if(selectedValue == 0){
-					$.ajax({
-						type:"get"
-						, url:"/post/list/order/rec"
-						, data:{"regionId":regionId}
-						, success:function(data){
-							if(data.result == "success"){
-								alert("추천순 조회 성공");
-							} else {
-								alert("추천순 조회 실패");
-							}
-						}
-						, error:function() {
-							alert("추천순 조회 에러");
-						}
-					});
+				if(selectedValue == "0"){
+					alert("최신순");
+					return;
 				}
-				
-				
 				
 				
 				if(selectedValue == "1"){
@@ -111,8 +103,13 @@
 				}
 				
 				if(selectedValue == "2"){
-					alert("추천순");
-					return;
+					alert("추천순 정렬");
+					$.ajax({
+						type:"get"
+						, url:"/post/list/order/rec"
+						, data:{"regionId":regionId}
+					});
+					location.reload();
 				}
 				
 			});

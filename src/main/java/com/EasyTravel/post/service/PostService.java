@@ -102,15 +102,13 @@ public class PostService {
 	
 	// 추천수 많은 순서대로 게시글 불러오기
 	public List<PostPreview> getPostListOrderByRecCount(int regionId){
-		List<Post> postList = postRepository.findAllByRegionIdOrderByRecCountDesc(regionId);
+		List<Post> postList = postRepository.findTop5ByRegionIdOrderByRecCountDesc(regionId);
 		
 		List<PostPreview> postPreviewList = new ArrayList<>();
 		
 		for(Post post:postList) {
 			Optional<User> optionalUser = userRepository.findById(post.getUserId());
 			User user = optionalUser.orElse(null);
-			
-//			int recCount = recommendationRepository.countByPostId(post.getId());
 			
 			PostPreview postPreview = PostPreview.builder()
 												.id(post.getId())
