@@ -2,6 +2,8 @@ package com.EasyTravel.post.domain;
 
 import java.util.Date;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,9 +42,11 @@ public class Post {
 	@Column(name="recCount")
 	private int recCount;
 	
+	@UpdateTimestamp
 	@Column(name="createdAt", updatable=false)
 	private Date createdAt;
 	
+	@UpdateTimestamp
 	@Column(name="updatedAt")
 	private Date updatedAt;
 }
