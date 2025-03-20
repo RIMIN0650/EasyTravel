@@ -44,14 +44,17 @@ public class PostController {
 		
 		List<PostPreview> postPreview = postService.getPostList(regionId);
 		
-		List<PostPreview> postPreviewOrderByRecCount = postService.getPostListOrderByRecCount(regionId);
+		List<PostPreview> viewOrder = postService.getPostListOrderByViewCount(regionId);
+		
+		List<PostPreview> recOrder = postService.getPostListOrderByRecCount(regionId);
 		
 		Region region = regionService.findRegionName(regionId);
 		
 		
 		
 		model.addAttribute("postPreview", postPreview);
-		model.addAttribute("PostPreviwOrderByRecCount", postPreviewOrderByRecCount);
+		model.addAttribute("viewOrder", viewOrder);
+		model.addAttribute("recOrder", recOrder);
 		model.addAttribute("regionName", region.getName());
 		
 		return "post/list";

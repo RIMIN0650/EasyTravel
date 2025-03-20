@@ -9,7 +9,7 @@
 <body>
 	<div id="wrap" class="bg-white">
 		<div id="post-box">
-			<h2 class="ml-3 mt-3"><h1 th:text="${recCount}"></h1> &#8251 여행 일정 추천 - <span th:text="${regionName}"></span></h2>
+			<h2 class="ml-3 mt-3"> &#8251 여행 일정 추천 - <span th:text="${regionName}"></span></h2>
 			<div class="d-flex justify-content-center mt-5 mb-3">
 				<div id="search-form" class="d-flex">
 					<input type="text" class="form-control mr-2">
@@ -35,18 +35,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="list : ${postPreviewOrderByRecCount}">
+					<tr th:each="list : ${viewOrder}">
 						<td th:text="${list.id}"></td>
 						<td>
 							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
 						</td>
-						<td th:text="${list.userName}" + 1></td>
+						<td th:text="${list.userName}"></td>
 						<td th:text="${list.viewCount}"></td>
 						<td th:text="${list.recCount}"></td>
 					</tr>
 				
+					<tr th:each="list : ${recOrder}">
+						<td th:text="${list.id}"></td>
+						<td>
+							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
+						</td>
+						<td th:text="${list.userName}"></td>
+						<td th:text="${list.viewCount}"></td>
+						<td th:text="${list.recCount}"></td>
+					</tr>				
+				
 					<tr th:each="list : ${postPreview}">
-
 						<td th:text="${list.id}"></td>
 						<td>
 							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
@@ -91,7 +100,7 @@
 				
 				let regionId = value;
 				
-				if(selectedValue == "0"){
+				/* if(selectedValue == "0"){
 					alert("최신순");
 					return;
 				}
@@ -110,7 +119,7 @@
 						, data:{"regionId":regionId}
 					});
 					location.reload();
-				}
+				} */
 				
 			});
 	

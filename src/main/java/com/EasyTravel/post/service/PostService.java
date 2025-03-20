@@ -101,8 +101,8 @@ public class PostService {
 	
 	
 	// 추천수 많은 순서대로 게시글 불러오기
-	public List<PostPreview> getPostListOrderByRecCount(int regionId){
-		List<Post> postList = postRepository.findTop5ByRegionIdOrderByRecCountDesc(regionId);
+	public List<PostPreview> getPostListOrderByViewCount(int regionId){
+		List<Post> postList = postRepository.findTop5ByRegionIdOrderByViewCountDesc(regionId);
 		
 		List<PostPreview> postPreviewList = new ArrayList<>();
 		
@@ -125,6 +125,30 @@ public class PostService {
 		return postPreviewList;
 	}
 	
+	
+	// 추천 순 내림차순 조회
+	public List<PostPreview> getPostListOrderByRecCount(int regionId){
+		List<Post> postList = postRepository.findTop5ByRegionIdOrderByRecCountDesc(regionId);
+		
+		List<PostPreview> postPreviewList = new ArrayList<>();
+		
+		for(Post post : postList) {
+			Optional<User> optionalUser = userRepository.findById(post.getUserId());
+			User user = optionalUser.orElse(null);
+			
+			PostPreview postPreview = PostPreview.builder()
+												.id(post.getId())
+												.regionId(post.getRegionId())
+												.userName(user.getUserName())
+												.title(post.getTitle())
+												.viewCount(post.getViewCount())
+												.recCount(post.getRecCount())
+												.build();
+			postPreviewList.add(postPreview);
+			
+		}
+		return postPreviewList;
+	}
 	
 	// 게시물 내용 불러오기
 	public Post getPostDetail(int postId) {
