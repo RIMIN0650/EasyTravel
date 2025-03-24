@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.repository.PostRepository;
-import com.EasyTravel.recommendation.repository.RecommendationRepository;
 import com.EasyTravel.region.domain.Region;
 import com.EasyTravel.region.repository.RegionRepository;
 import com.EasyTravel.user.domain.User;
