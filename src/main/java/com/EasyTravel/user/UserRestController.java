@@ -1,5 +1,6 @@
 package com.EasyTravel.user;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.EasyTravel.user.domain.User;
 import com.EasyTravel.user.service.UserService;
+import com.EasyTravel.userSalt.domain.UserSalt;
+import com.EasyTravel.userSalt.service.UserSaltService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,13 +23,19 @@ public class UserRestController {
 	@Autowired
 	public UserService userService;
 	
+	@Autowired
+	private UserSaltService userSaltService;
+	
+	
 	// 사용자 회원가입 
 	@PostMapping("/user/join")
 	public Map<String, String> userJoin(@RequestParam("loginId") String loginId
 										, @RequestParam("password") String password
 										, @RequestParam("userName") String userName
 										, @RequestParam("email") String email
-										){
+										) throws NoSuchAlgorithmException{
+		
+		UserSalt userSalt = userSaltService.saveUserSalt(loginId);
 		
 		User user = userService.addUser(loginId, password, userName, email);
 		
