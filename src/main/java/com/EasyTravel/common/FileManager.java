@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManager {
 	
 	// 파일이 업로드 될 기본 디렉토리 경로를 정의하는 상수
+	//public static final String FILE_UPLOAD_PATH = "/home/ec2-user/upload/rmTheater";
 	public static final String FILE_UPLOAD_PATH = "C:\\web\\spring project\\upload\\rmTheater";
 	
 	// 이 클래스의 로그 메시지를 기록하는 로거 인스턴스
@@ -28,6 +29,7 @@ public class FileManager {
 		
 		// 같은 이름의 파일을 처리하기 위해
 		// 폴더를 만들어서 파일 저장
+		// 영화의 movieId를 폴더이름
 		// 현재시간 정보를 폴더 이름에 포함
 		
 		// directoryName movieId와 현재 시간을 밀리초로 사용하여 고유한 디렉토리 이름을 생성
@@ -76,6 +78,7 @@ public class FileManager {
 		
 		// 같은 이름의 파일을 처리하기 위해
 		// 폴더를 만들어서 파일 저장
+		// 영화의 movieId를 폴더이름
 		// 현재시간 정보를 폴더 이름에 포함
 		
 		// directoryName movieId와 현재 시간을 밀리초로 사용하여 고유한 디렉토리 이름을 생성
