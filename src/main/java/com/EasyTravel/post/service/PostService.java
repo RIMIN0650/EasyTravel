@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.EasyTravel.common.FileManager;
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.repository.PostRepository;
@@ -46,13 +48,17 @@ public class PostService {
 	
 	
 	// 새로운 게시물 등록
-	public Post addPost(int regionId, int userId, String title, String body) {
+	public Post addPost(int regionId, int userId, String title
+						, String body , MultipartFile file) { 
+		
+		String filePath = FileManager.saveFile(title, file);
 		
 		Post post = Post.builder()
 						.regionId(regionId)
 						.userId(userId)
 						.title(title)
 						.body(body)
+						.imagePath(filePath)
 						.viewCount(0)
 						.recCount(0)
 						.build();

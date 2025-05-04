@@ -43,6 +43,9 @@ public class Post {
 	@Column(name="recCount")
 	private int recCount;
 	
+	@Column(name="imagePath")
+	private String imagePath;
+	
 	@CreationTimestamp
 	@Column(name="createdAt", updatable=false)
 	private Date createdAt;
