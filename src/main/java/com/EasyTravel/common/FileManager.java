@@ -14,7 +14,7 @@ public class FileManager {
 	
 	// 파일이 업로드 될 기본 디렉토리 경로를 정의하는 상수
 	//public static final String FILE_UPLOAD_PATH = "/home/ec2-user/upload/rmTheater";
-	public static final String FILE_UPLOAD_PATH = "C:\\web\\spring project\\upload\\rmTheater";
+	public static final String FILE_UPLOAD_PATH = "C:\\web\\spring project\\upload\\easyTravel";
 	
 	// 이 클래스의 로그 메시지를 기록하는 로거 인스턴스
 	public static Logger logger = LoggerFactory.getLogger(FileManager.class);
