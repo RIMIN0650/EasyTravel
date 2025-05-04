@@ -74,6 +74,8 @@ public class PostController {
 		return "post/upload";
 	}
 	
+	
+	
 	// 게시물 확인 페이지
 	// 게시물 추천수 조회하기
 	@GetMapping("/post/view")
