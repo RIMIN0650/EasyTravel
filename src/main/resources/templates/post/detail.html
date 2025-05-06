@@ -1,107 +1,130 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>게시글 상세보기</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        #post-detail-form {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #post-body {
+            white-space: pre-wrap;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        .img-thumbnail {
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .meta-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .btn-area {
+            margin-top: 30px;
+        }
+    </style>
 </head>
-<body class="d-flex justify-content-between">
-	<div id="post-detail-form">
-		<div th:each="post : ${post}">
-	    <h1 th:text="${post.title}"></h1>
-	    
-	    
-	    <img th:each="img : ${imageList}" th:src="@{${img.imagePath}}" class="img-thumbnail m-2" style="width:200px;">
-	    
-	    
-	    <div th:text="${post.body}" id="post-body"></div>
-	    <div class="d-flex justify-content-between">
-		    <div>
-		  		<button type="button" class="btn btn-info" id="to-list-button">뒤로</button>
-		    </div>
-		    <div class="d-flex">
-			    <div class="mr-3" th:text="추천수 + '    ' + ${recCount}"></div>
-			    <div class="mr-3" th:text="작성일 + '    ' + ${post.createdAt}"></div>
-		    </div>
-	    		
-	    	<div>
-	    		<button th:if="${checkRecommend}" class="text-danger unrec-btn" th:data-post-id="${post.id}">추천취소</button>
-				<button th:unless="${checkRecommend}" class="text-danger rec-btn" th:data-post-id="${post.id}">추천</button>
-	    		
-	    	</div>
-	    </div>
-	    
-	    </div>
-	</div>
+<body>
 
-	
+<div id="post-detail-form">
+    <div th:each="post : ${post}">
+        <h2 class="font-weight-bold mb-4" th:text="${post.title}"></h2>
+
+        <div class="mb-4">
+            <img th:each="img : ${imageList}" th:src="@{${img.imagePath}}" class="img-thumbnail mr-2 mb-2">
+        </div>
+
+        <div id="post-body" th:text="${post.body}"></div>
+
+        <hr>
+
+        <div class="d-flex justify-content-between align-items-center meta-info mt-4">
+            <div>
+                <span th:text="'추천수: ' + ${recCount}"></span> |
+                <span th:text="'작성일: ' + ${post.createdAt}"></span>
+            </div>
+
+            <div>
+                <button th:if="${checkRecommend}" class="btn btn-outline-danger btn-sm unrec-btn" th:data-post-id="${post.id}">
+                    추천취소
+                </button>
+                <button th:unless="${checkRecommend}" class="btn btn-outline-info btn-sm rec-btn" th:data-post-id="${post.id}">
+                    추천
+                </button>
+            </div>
+        </div>
+
+        <div class="btn-area text-right">
+            <button type="button" class="btn btn-secondary" id="to-list-button">← 목록으로</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+        crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#to-list-button").on("click", function () {
+            location.href = "/post/home";
+        });
+
+        $(".rec-btn").on("click", function () {
+            let postId = $(this).data("post-id");
+            $.ajax({
+                type: "post",
+                url: "/post/recommend",
+                data: { "postId": postId },
+                success: function (data) {
+                    if (data.result === "success") {
+                        location.reload();
+                    } else {
+                        alert("추천 실패");
+                    }
+                },
+                error: function () {
+                    alert("추천 에러");
+                }
+            });
+        });
+
+        $(".unrec-btn").on("click", function () {
+            let postId = $(this).data("post-id");
+            $.ajax({
+                type: "delete",
+                url: "/post/deleteRecommend",
+                data: { "postId": postId },
+                success: function (data) {
+                    if (data.result === "success") {
+                        location.reload();
+                    } else {
+                        alert("추천 취소 실패");
+                    }
+                },
+                error: function () {
+                    alert("추천 취소 실패");
+                }
+            });
+        });
+    });
+</script>
+
 </body>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-	
-	
-	
-	<script>
-	$(document).ready(function(){	
-		
-		
-			$("#to-list-button").on("click",function(){
-				location.href="/post/home";
-			});
-			
-			
-			//추천 버튼
-			$(".rec-btn").on("click", function(){
-				
-				let postId = $(this).data("post-id");
-				
-				$.ajax({
-					type:"post"
-					, url:"/post/recommend"
-					, data:{"postId":postId}
-					, success:function(data){
-						if(data.result == "success"){
-							location.reload();
-						} else {
-							alert("추천 실패");
-						}
-					}
-					, error:function(){
-						alert("추천 에러");
-					}
-				})			
-			});
-			
-			
-			// 추천 취소 버튼
-			$(".unrec-btn").on("click", function(){
-				
-				let postId = $(this).data("post-id");
-				
-				$.ajax({
-					type:"delete"
-					,url:"/post/deleteRecommend"
-					, data:{"postId":postId}
-					, success:function(data){
-						if(data.result == "success"){
-							location.reload();
-						} else {
-							alert("추천 취소 실패");
-						}
-					}
-					, error:function(){
-						alert("추천 취소 실패");
-					}
-				})
-			});
-			
-			
-			
-		});
-		
-	
-	</script>
 </html>
