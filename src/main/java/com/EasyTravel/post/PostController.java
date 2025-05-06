@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.service.PostService;
+import com.EasyTravel.postImage.domain.PostImage;
+import com.EasyTravel.postImage.service.PostImageService;
 import com.EasyTravel.recommendation.service.RecommendationService;
 import com.EasyTravel.region.domain.Region;
 import com.EasyTravel.region.service.RegionService;
@@ -26,6 +29,9 @@ public class PostController {
 	
 	@Autowired
 	private RecommendationService recommendationService;
+	
+	@Autowired
+	private PostImageService postImageService;
 	
 	@GetMapping("/post/home")
 	public String managerJoin(Model model) {
@@ -83,6 +89,8 @@ public class PostController {
 		
 		Post post = postService.getPostDetail(postId);
 		
+		List<PostImage> imageList = postImageService.getImageList(postId);
+		
 		int recCount = recommendationService.countRecommend(postId);
 		
 		// 게시물 눌렀을 때 해당 id의 게시물 조회수 + 1 해주기
@@ -91,7 +99,9 @@ public class PostController {
 		// 사용자가 특정 게시물 추천 여부 확인
 		boolean checkRecommend = recommendationService.checkRecommend(postId, recCount);
 		
+		
 		model.addAttribute("post", post);
+		model.addAttribute("imageList", imageList);
 		model.addAttribute("recCount", recCount);
 		model.addAttribute("checkRecommend",checkRecommend);
 		

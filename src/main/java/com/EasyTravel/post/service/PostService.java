@@ -12,6 +12,8 @@ import com.EasyTravel.common.FileManager;
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.repository.PostRepository;
+import com.EasyTravel.postImage.domain.PostImage;
+import com.EasyTravel.postImage.repository.PostImageRepository;
 import com.EasyTravel.region.domain.Region;
 import com.EasyTravel.region.repository.RegionRepository;
 import com.EasyTravel.user.domain.User;
@@ -27,6 +29,9 @@ public class PostService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PostImageRepository postImageRepository;
 	
 //	@Autowired
 //	private RecommendationRepository recommendationRepository;
@@ -49,23 +54,37 @@ public class PostService {
 	
 	// 새로운 게시물 등록
 	public Post addPost(int regionId, int userId, String title
-						, String body , MultipartFile file) { 
+						, String body , List<MultipartFile> imageFiles) { 
 		
-		String filePath = FileManager.saveFile(title, file);
+		
 		
 		Post post = Post.builder()
 						.regionId(regionId)
 						.userId(userId)
 						.title(title)
 						.body(body)
-						.imagePath(filePath)
 						.viewCount(0)
 						.recCount(0)
 						.build();
 		
+		postRepository.save(post);
+		
+		for(MultipartFile file : imageFiles) {
+			if(!file.isEmpty()) {
+				String filePath = FileManager.saveFile(title, file);
+				PostImage image = new PostImage();
+				image.setPost(post);
+				image.setImagePath(filePath);
+				postImageRepository.save(image);
+				
+			}
+		}
+		
+		return post;
 		
 		
-		return postRepository.save(post);
+		
+		
 		
 		// 게시물 조회수를 따로 테이블 만들려고 했는데
 		// regionId, userId, title, body만을 가지고 중복을 구분할 수 없을 것 같아서

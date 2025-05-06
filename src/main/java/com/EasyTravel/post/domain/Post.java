@@ -1,15 +1,21 @@
 package com.EasyTravel.post.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.EasyTravel.postImage.domain.PostImage;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +48,14 @@ public class Post {
 	
 	@Column(name="recCount")
 	private int recCount;
+	
+	
+	@OneToMany(mappedBy="post", cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<PostImage> images = new ArrayList<>();
+	
+	
+	
+	
 	
 	@Column(name="imagePath")
 	private String imagePath;

@@ -28,7 +28,7 @@
 						<div class="d-flex">
 							<label for="fileInput"><i class="bi bi-image big-font right" id="addPoster"></i></label>
 							<div>이미지추가</div>
-							<input type="file" id="fileInput" class="d-none">
+							<input type="file" id="fileInput" class="d-none" name="imageFile" multiple>
 						</div>
 					</div>
 					
@@ -74,7 +74,7 @@
                 let title = $("#title").val();
                 let body = $("#input-text").val();
 				
-                let file = $("#fileInput")[0].files[0];
+                
                 
                 
                 if(regionNumber == 0){
@@ -87,7 +87,12 @@
                 formData.append("regionId", regionId);
                 formData.append("title", title);
                 formData.append("body", body);
-                formData.append("imageFile", file);
+                
+                
+                let files = $("#fileInput")[0].files;
+                for(let i = 0; i < files.length; i++){
+                	formData.append("imageFile", files[i]);
+                }
                 
                 
                 

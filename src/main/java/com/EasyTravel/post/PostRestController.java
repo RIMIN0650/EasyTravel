@@ -1,6 +1,7 @@
 package com.EasyTravel.post;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.EasyTravel.common.FileManager;
 import com.EasyTravel.post.domain.Post;
 import com.EasyTravel.post.service.PostService;
 
@@ -26,13 +26,13 @@ public class PostRestController {
 	public Map<String, String> postUpload(@RequestParam("regionId") int regionId
 											, @RequestParam("title") String title
 											, @RequestParam("body") String body
-											, @RequestParam("imageFile") MultipartFile imageFile
+											, @RequestParam("imageFile") List<MultipartFile> imageFiles
 											, HttpSession session){
 		
 		
 		int userId = (Integer)session.getAttribute("userId");
 		
-		Post post = postService.addPost(regionId, userId, title, body, imageFile);
+		Post post = postService.addPost(regionId, userId, title, body, imageFiles);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
