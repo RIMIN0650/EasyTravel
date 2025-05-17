@@ -1,89 +1,132 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Post</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+  <meta charset="UTF-8">
+  <title>지역별 게시판</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+  <style>
+    body {
+      background-color: #fef6f0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .board-container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      margin-top: 40px;
+    }
+
+    .board-title {
+      color: #2c3e50;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .region-buttons a {
+      margin: 6px;
+      background-color: #ffb88c;
+      color: white;
+      border: none;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .region-buttons a:hover {
+      background-color: #e07b39;
+      color: white;
+    }
+
+    .region-preview {
+      background-color: #fff6ec;
+      border-radius: 10px;
+      padding: 25px 30px;
+      margin-top: 20px;
+    }
+
+    .preview-section {
+      margin-top: 30px;
+    }
+
+    .preview-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      border-left: 5px solid #ff9a6a;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+
+    .preview-item {
+      margin-left: 15px;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    #post-upload-btn {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+    }
+
+    #post-upload-btn:hover {
+      background-color: #1c2731;
+    }
+  </style>
 </head>
 <body>
-    <div id="wrap">
+  <div class="container">
+    <div class="board-container">
+      <h2 class="board-title">📌 지역별 게시판</h2>
 
-        <div>
-            <div class="mt-3 bg-white">
-                <h3 class="mt-5 ml-3">지역별 게시판</h3>
-                
-                <div class="d-flex mt-3 mx-4 justify-content-between">
-                    <div th:each="region : ${regionList}" class="text-center ml-3">
-					    <a th:href="@{/post/list?regionId={regionId}(regionId=${region.id})}" class="btn btn-primary" th:text="${region.name}"></a>
-					</div>
-
-                </div>
-
-                <div class="d-flex justify-content-center mt-5">
-                    <div id="region-preview">
-                        <h5 class="mt-4 mb-3 ml-2">부산 후기</h5>
-                        <div class="mt-2 ml-4">
-                            <b>[1]</b> 부산의 매력을 느낄 수 있는 여행지 탐방기 <br>
-                        </div>
-                        <div class="mt-2 ml-4">
-                            <b>[2]</b> 달음산 자연 속 힐링 여행 후기 <br>
-                        </div>
-                        <div class="mt-2 ml-4">
-                            <b>[3]</b> 부산 바다와 함께한 여행, 최고의 휴식처 <br>
-                        </div>
-                        
-                        <br>
-                        
-                        <h5 class="mt-4 mb-3 ml-2">제주 숨겨진 맛집 후기</h5>
-                        <div class="mt-2 ml-4">
-                            <b>[1]</b> 제주 현지인들만 아는 맛집! <br>
-                        </div>
-                        <div class="mt-2 ml-4">
-                            <b>[2]</b> 인터넷에 올라와있지 않은 숨겨진 사진 스팟 <br>
-                        </div>
-                        <div class="mt-2 ml-4">
-                            <b>[3]</b> 자연 경치를 보면서 힐링하고 싶다면 이곳은 꼭~ <br>
-                        </div>
-                        
-                        <h5 class="mt-5 mb-3 ml-2">서울 액티비티</h5>
-                        <div class="mt-2 ml-4">
-                            <b>[1]</b> 서울에서도 여러 액티비티를 즐기고 싶다면~ <br>
-                        </div>
-                        <div class="mt-2 ml-4">
-                            <b>[2]</b> 제주도 부럽지 않은 흑돼지 맛집!! <br>
-                        </div>
-                        
-                    </div>
-                    
-                    
-                </div>
-                <div class="d-flex justify-content-end mt-3">
-					<button type="button" class="btn btn-success" id="post-upload-btn">글쓰기</button>
-				</div>
-            </div>
+      <div class="region-buttons d-flex flex-wrap mb-4">
+        <div th:each="region : ${regionList}">
+          <a th:href="@{/post/list?regionId={regionId}(regionId=${region.id})}" 
+             class="btn btn-sm" th:text="${region.name}"></a>
         </div>
+      </div>
+
+      <div class="region-preview mx-auto">
+        
+        <div class="preview-section">
+          <div class="preview-title">부산 후기</div>
+          <div class="preview-item"><b>[1]</b> 부산의 매력을 느낄 수 있는 여행지 탐방기</div>
+          <div class="preview-item"><b>[2]</b> 달음산 자연 속 힐링 여행 후기</div>
+          <div class="preview-item"><b>[3]</b> 부산 바다와 함께한 여행, 최고의 휴식처</div>
+        </div>
+
+        <div class="preview-section">
+          <div class="preview-title">제주 숨겨진 맛집 후기</div>
+          <div class="preview-item"><b>[1]</b> 제주 현지인들만 아는 맛집!</div>
+          <div class="preview-item"><b>[2]</b> 인터넷에 올라와있지 않은 숨겨진 사진 스팟</div>
+          <div class="preview-item"><b>[3]</b> 자연 경치를 보면서 힐링하고 싶다면 이곳은 꼭~</div>
+        </div>
+
+        <div class="preview-section">
+          <div class="preview-title">서울 액티비티</div>
+          <div class="preview-item"><b>[1]</b> 서울에서도 여러 액티비티를 즐기고 싶다면~</div>
+          <div class="preview-item"><b>[2]</b> 제주도 부럽지 않은 흑돼지 맛집!!</div>
+        </div>
+
+      </div>
+
+      <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn" id="post-upload-btn">글쓰기</button>
+      </div>
     </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#post-upload-btn").on("click", function () {
+        location.href = "/post/upload";
+      });
+    });
+  </script>
 </body>
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-
-<script>
-	$(document).ready(function(){
-		
-		$("#post-upload-btn").on("click",function(){
-			location.href="/post/upload";
-		});
-		
-		
-	});
-
-
-</script>
-
-
-
-
 </html>

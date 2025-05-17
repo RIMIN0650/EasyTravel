@@ -1,132 +1,141 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>List</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+  <meta charset="UTF-8">
+  <title>여행 일정 추천 게시판</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #wrap {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-weight: bold;
+      color: #343a40;
+      border-bottom: 2px solid #dee2e6;
+      padding-bottom: 10px;
+    }
+
+    #search-form input {
+      width: 300px;
+    }
+
+    #order-form select, #order-form button {
+      vertical-align: middle;
+    }
+
+    table th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    a.text-dark:hover {
+      color: #007bff;
+      text-decoration: underline;
+    }
+
+    #to-main-post-button {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-	<div id="wrap" class="bg-white">
-		<div id="post-box">
-			<h2 class="ml-3 mt-3"> &#8251 여행 일정 추천 - <span th:text="${regionName}"></span></h2>
-			<div class="d-flex justify-content-center mt-5 mb-3">
-				<div id="search-form" class="d-flex">
-					<input type="text" class="form-control mr-2">
-					<button type="button" id="search-btn" class="btn btn-info">검색</button>
-				</div>
-				<div id="order-form" class="ml-3">
-					<select name="order" id="order-select">  			
-					  <option value="0">최신순</option>
-					  <option value="1">조회수</option>
-					  <option value="2">추천순</option>
-					</select>
-					<button type="button" id="order-btn" class="btn btn-success btn-sm">정렬</button>
-				</div>
-			</div>
-			<table class="table text-center">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>사용자</th>
-						<th>조회수</th>
-						<th>추천수</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="list : ${viewOrder}">
-						<td th:text="${list.id}"></td>
-						<td>
-							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
-						</td>
-						<td th:text="${list.userName}"></td>
-						<td th:text="${list.viewCount}"></td>
-						<td th:text="${list.recCount}"></td>
-					</tr>
-				
-					<tr th:each="list : ${recOrder}">
-						<td th:text="${list.id}"></td>
-						<td>
-							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
-						</td>
-						<td th:text="${list.userName}"></td>
-						<td th:text="${list.viewCount}"></td>
-						<td th:text="${list.recCount}"></td>
-					</tr>				
-				
-					<tr th:each="list : ${postPreview}">
-						<td th:text="${list.id}"></td>
-						<td>
-							<a class="text-dark" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
-						</td>
-						<td th:text="${list.userName}"></td>
-						<td th:text="${list.viewCount}"></td>
-						<td th:text="${list.recCount}"></td>
-					</tr>
-				</tbody>
-			</table>
-			<button type="button" class="btn btn-info" id="to-main-post-button">뒤로</button>
-		</div>
-	</div>
-	
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-	<script>
-		
-		$(document).ready(function(){
-		
-			const params = new URLSearchParams(window.location.search);
-			const value = params.get('regionId');
-			
-			$("#to-main-post-button").on("click", function(){
-				location.href = "/post/home";
-			});
-					
-			// 이전 프로젝트에서는 아래 구문을 써줘야 변경된 값을 받아오는 것이 적용됐는데
-			// 왜 아래를 주석처리 해도 변경된 값을 받아올 수 있을까
-			// 이전 프로젝트에서는 selectPicker를 사용했고
-			// 이번엔 사용하지 않아서 그런가
-			/* $("#order-select").change(function(){
-				let selectOrder = document.getElementById("selectOrder");
-				orderName = selectOrder.options[selectOrder.selectedIndex].value;
-			}); */
-			
-			$("#order-btn").on("click", function(){
-				
-				let selectedValue = $("#order-select").val();
-				
-				let regionId = value;
-				
-				/* if(selectedValue == "0"){
-					alert("최신순");
-					return;
-				}
-				
-				
-				if(selectedValue == "1"){
-					alert("조회순");
-					
-				}
-				
-				if(selectedValue == "2"){
-					alert("추천순 정렬");
-					$.ajax({
-						type:"get"
-						, url:"/post/list/order/rec"
-						, data:{"regionId":regionId}
-					});
-					location.reload();
-				} */
-				
-			});
-	
-	
-		});
-	
-	</script>
-	
+  <div id="wrap" class="bg-white">
+    <div id="post-box">
+      <h2 class="ml-2"> &#8251 여행 일정 추천 - <span th:text="${regionName}"></span></h2>
+
+      <div class="d-flex justify-content-between align-items-center mt-4 mb-3 ">
+        <div id="search-form" class="d-flex mb-2">
+          <input type="text" class="form-control mr-2" placeholder="게시글 제목 검색">
+          <button type="button" id="search-btn" class="btn btn-info">🔍 검색</button>
+        </div>
+        <div id="order-form" class="d-flex align-items-center">
+          <select name="order" id="order-select" class="form-control mr-2">
+            <option value="0">최신순</option>
+            <option value="1">조회수</option>
+            <option value="2">추천순</option>
+          </select>
+          <button type="button" id="order-btn" class="btn btn-success">정렬</button>
+        </div>
+      </div>
+
+      <table class="table table-hover text-center">
+        <thead class="thead-dark">
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>사용자</th>
+            <th>조회수</th>
+            <th>추천수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="list : ${postPreview}">
+            <td th:text="${list.id}"></td>
+            <td>
+              <a class="text-dark font-weight-bold" th:href="@{/post/view(postId=${list.id})}" th:text="${list.title}"></a>
+            </td>
+            <td th:text="${list.userName}"></td>
+            <td th:text="${list.viewCount}"></td>
+            <td th:text="${list.recCount}"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="text-right">
+        <button type="button" class="btn btn-outline-secondary" id="to-main-post-button">← 뒤로 가기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function () {
+      const params = new URLSearchParams(window.location.search);
+      const value = params.get('regionId');
+
+      $("#to-main-post-button").on("click", function () {
+        location.href = "/post/home";
+      });
+
+      $("#order-btn").on("click", function () {
+        let selectedValue = $("#order-select").val();
+        let regionId = value;
+
+        if (selectedValue === "1") {
+          location.href = "/post/list/order/view?regionId=" + regionId;
+        } else if (selectedValue === "2") {
+          location.href = "/post/list/order/rec?regionId=" + regionId;
+        } else {
+          location.href = "/post/list?regionId=" + regionId;
+        }
+      });
+
+      $("#search-btn").on("click", function () {
+        let keyword = $("#search-form input").val();
+        if (keyword.trim() !== "") {
+          location.href = "/post/search?regionId=" + value + "&keyword=" + encodeURIComponent(keyword);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

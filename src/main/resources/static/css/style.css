@@ -33,12 +33,14 @@ header{
 
 /*post\list.jsp*/
 
-#search-form{
-	width:800px;
-}
 #search-btn{
-	width:70px;
+	width:90px;
 }
+
+#order-btn{
+	width: 80px;
+}
+
 
 
 
