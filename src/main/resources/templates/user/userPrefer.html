@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>사용자 취향 조사</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>사용자 취향 조사</h2>
+    <form action="/submit-preference" method="POST">
+      <label for="userId">사용자 ID</label>
+      <input type="number" id="userId" name="userId" required>
+
+      <label for="first">가장 선호하는 취향 <span style="color: red;">*</span></label>
+      <input type="text" id="first" name="first" required>
+
+      <label for="second">두 번째 선호하는 취향</label>
+      <input type="text" id="second" name="second">
+
+      <label for="third">세 번째 선호하는 취향</label>
+      <input type="text" id="third" name="third">
+
+      <button type="submit">제출하기</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.EasyTravel.user;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -19,6 +20,10 @@ public class UserController {
 		return "/user/login";
 	}
 	
+	@GetMapping("/user/preference/store")
+	public String userPreference() {
+		return "/user/userPrefer";
+	}
 
 	
 }
