@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.EasyTravel.common.FileManager;
 import com.EasyTravel.post.domain.Post;
+import com.EasyTravel.post.dto.PopularPost;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.repository.PostRepository;
 import com.EasyTravel.postImage.domain.PostImage;
@@ -199,6 +200,35 @@ public class PostService {
 		return post;
 	}
 	
+	
+	// 추천 순 많은 게시물 상위 4개 불러오기
+	public List<PopularPost> getTopRecPost() {
+		List<Post> topPostList = postRepository.findTop5ByOrderByRecCountDesc();
+		
+		List<PopularPost> popularPostList = new ArrayList<>();
+		
+		
+		
+		for(Post post : topPostList) {
+			Optional<Region> optionalRegion = regionRepository.findById(post.getRegionId());
+			Region region = optionalRegion.orElse(null);
+			
+			Optional<User> optionalUser = userRepository.findById(post.getUserId());
+			User user = optionalUser.orElse(null);
+			
+			PopularPost popularPost = PopularPost.builder()
+													.regionName(region.getName())
+													.title(post.getTitle())
+													.userName(user.getUserName())
+													.recCount(post.getRecCount())
+													.build();
+			popularPostList.add(popularPost);
+		}
+		
+		
+		
+		return popularPostList;
+	}
 	
 	
 	

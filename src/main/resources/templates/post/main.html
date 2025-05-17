@@ -1,77 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>지역별 게시판</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
   <style>
     body {
-      background-color: #fef6f0;
-      font-family: 'Segoe UI', sans-serif;
+      background-color: #fafafa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
     }
 
     .board-container {
-      background-color: white;
-      border-radius: 15px;
-      padding: 40px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px 35px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       margin-top: 40px;
     }
 
     .board-title {
-      color: #2c3e50;
-      font-weight: bold;
-      margin-bottom: 30px;
+      color: #222;
+      font-weight: 600;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
     }
 
     .region-buttons a {
-      margin: 6px;
-      background-color: #ffb88c;
+      margin: 5px 6px 5px 0;
+      background-color: #6c757d;
       color: white;
-      border: none;
-      transition: all 0.3s ease-in-out;
+      border-radius: 5px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .region-buttons a:hover {
-      background-color: #e07b39;
+      background-color: #495057;
       color: white;
+      text-decoration: none;
     }
 
-    .region-preview {
-      background-color: #fff6ec;
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      font-size: 1rem;
+    }
+
+    thead tr {
+      background-color: #e9ecef;
       border-radius: 10px;
-      padding: 25px 30px;
-      margin-top: 20px;
     }
 
-    .preview-section {
-      margin-top: 30px;
-    }
-
-    .preview-title {
-      font-size: 1.2rem;
+    thead th {
       font-weight: 600;
-      color: #2c3e50;
-      border-left: 5px solid #ff9a6a;
-      padding-left: 10px;
-      margin-bottom: 15px;
+      color: #495057;
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: none;
     }
 
-    .preview-item {
-      margin-left: 15px;
-      color: #333;
-      line-height: 1.7;
+    tbody tr {
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      border-radius: 10px;
+      transition: background-color 0.2s ease;
     }
 
-    #post-upload-btn {
-      background-color: #2c3e50;
-      color: white;
+    tbody tr:hover {
+      background-color: #f8f9fa;
+      cursor: pointer;
+    }
+
+    tbody td {
+      padding: 12px 15px;
+      color: #555;
+      vertical-align: middle;
+      text-align: center;
       border: none;
     }
 
+    #post-upload-btn {
+      background-color: #343a40;
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.05rem;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
     #post-upload-btn:hover {
-      background-color: #1c2731;
+      background-color: #212529;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -80,39 +106,36 @@
     <div class="board-container">
       <h2 class="board-title">📌 지역별 게시판</h2>
 
-      <div class="region-buttons d-flex flex-wrap mb-4">
-        <div th:each="region : ${regionList}">
-          <a th:href="@{/post/list?regionId={regionId}(regionId=${region.id})}" 
-             class="btn btn-sm" th:text="${region.name}"></a>
-        </div>
-      </div>
+      <div class="region-buttons d-flex flex-wrap justify-content-between mb-4">
+		  <a th:each="region : ${regionList}"
+		     th:href="@{/post/list?regionId={regionId}(regionId=${region.id})}"
+		     class="btn btn-sm"
+		     th:text="${region.name}">
+		  </a>
+	  </div>
 
-      <div class="region-preview mx-auto">
-        
-        <div class="preview-section">
-          <div class="preview-title">부산 후기</div>
-          <div class="preview-item"><b>[1]</b> 부산의 매력을 느낄 수 있는 여행지 탐방기</div>
-          <div class="preview-item"><b>[2]</b> 달음산 자연 속 힐링 여행 후기</div>
-          <div class="preview-item"><b>[3]</b> 부산 바다와 함께한 여행, 최고의 휴식처</div>
-        </div>
 
-        <div class="preview-section">
-          <div class="preview-title">제주 숨겨진 맛집 후기</div>
-          <div class="preview-item"><b>[1]</b> 제주 현지인들만 아는 맛집!</div>
-          <div class="preview-item"><b>[2]</b> 인터넷에 올라와있지 않은 숨겨진 사진 스팟</div>
-          <div class="preview-item"><b>[3]</b> 자연 경치를 보면서 힐링하고 싶다면 이곳은 꼭~</div>
-        </div>
-
-        <div class="preview-section">
-          <div class="preview-title">서울 액티비티</div>
-          <div class="preview-item"><b>[1]</b> 서울에서도 여러 액티비티를 즐기고 싶다면~</div>
-          <div class="preview-item"><b>[2]</b> 제주도 부럽지 않은 흑돼지 맛집!!</div>
-        </div>
-
-      </div>
+      <table>
+        <thead>
+          <tr>
+          	<th>지역</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>추천수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="list : ${postList}">
+          	<td th:text="${list.regionName}"></td>
+            <td th:text="${list.title}"></td>
+            <td th:text="${list.userName}"></td>
+            <td th:text="${list.recCount}"></td>
+          </tr>
+        </tbody>
+      </table>
 
       <div class="d-flex justify-content-end mt-4">
-        <button type="button" class="btn" id="post-upload-btn">글쓰기</button>
+        <button type="button" id="post-upload-btn">글쓰기</button>
       </div>
     </div>
   </div>

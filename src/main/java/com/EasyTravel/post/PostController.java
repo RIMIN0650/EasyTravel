@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EasyTravel.post.domain.Post;
+import com.EasyTravel.post.dto.PopularPost;
 import com.EasyTravel.post.dto.PostPreview;
 import com.EasyTravel.post.service.PostService;
 import com.EasyTravel.postImage.domain.PostImage;
@@ -33,15 +33,24 @@ public class PostController {
 	@Autowired
 	private PostImageService postImageService;
 	
+	
+	// 메인 페이지
 	@GetMapping("/post/home")
 	public String managerJoin(Model model) {
 		
+		// 지역 리스트 불러오기
 		List<Region> regionList = postService.getRegionList();
 		
+		// 추천 수 높은 상위 4개 게시물 불러오기
+		List<PopularPost> popularPostList = postService.getTopRecPost();
+		
+		
 		model.addAttribute("regionList", regionList);
+		model.addAttribute("postList", popularPostList);
 		
 		return "post/main";
 	}
+	
 	
 	// 게시물 리스트 보여주기
 	@GetMapping("/post/list")
@@ -107,6 +116,19 @@ public class PostController {
 		
 		return "post/detail";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

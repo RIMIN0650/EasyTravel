@@ -49,13 +49,8 @@ public class Post {
 	@Column(name="recCount")
 	private int recCount;
 	
-	
 	@OneToMany(mappedBy="post", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<PostImage> images = new ArrayList<>();
-	
-	
-	
-	
 	
 	@Column(name="imagePath")
 	private String imagePath;
