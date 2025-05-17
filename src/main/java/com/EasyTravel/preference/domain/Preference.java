@@ -31,14 +31,13 @@ public class Preference {
 	@Column(name="userId")
 	private int userId;
 	
-	@Column(name="first")
 	private String first;
 	
-	@Column(name="second")
 	private String second;
 	
-	@Column(name="third")
 	private String third;
+	
+	private String etcetra;
 	
 	@CreationTimestamp
 	@Column(name="createdAt", updatable=false)
@@ -47,6 +46,5 @@ public class Preference {
 	@UpdateTimestamp
 	@Column(name="updatedAt")
 	private Date updatedAt;
-	
 	
 }
