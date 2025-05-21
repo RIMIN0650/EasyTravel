@@ -1,0 +1,58 @@
+
+
+/* 상단 바 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3b5998;
+    color: white;
+    padding: 20px 30px;
+}
+
+/* 로고 */
+.logo a {  
+    text-decoration: none;  
+    color: white;  
+}
+
+/* 네비게이션 버튼들 */
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-button:hover {
+    color: #3b5998;
+    background-color: white;
+}
+
+.nav-button:focus {
+    outline: none;
+}
+
+/* 로그인 버튼 */
+.login-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-btn:hover {
+    background-color: white;
+    color: #3b5998;
+}
