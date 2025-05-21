@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>여행 계획 설문지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"], input[type="number"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>✈️ 여행 계획 설문지</h2>
+    <form id="travelForm" onsubmit="submitForm(event)">
+        <label>출발지:</label>
+        <input type="text" id="start" name="start" placeholder="예: 서울" required>
+        
+        <label>목적지:</label>
+        <input type="text" id="destination" name="destination" placeholder="예: 부산" required>
+        
+        <label>출발 날짜:</label>
+        <input type="date" id="startDate" name="startDate" required>
+        
+        <label>여행 일수:</label>
+        <input type="number" id="days" name="days" placeholder="예: 3" min="1" required>
+        
+        <label>여행 테마:</label>
+        <input type="text" id="theme" name="theme" placeholder="예: 자연, 힐링, 역사" required>
+        
+        <button type="submit">여행 일정 생성하기</button>
+        
+        <div class="form-info">
+            출발 날짜와 장소에 따른 날씨 정보가 제공됩니다
+        </div>
+    </form>
+    
+    <script>
+        // 오늘 날짜를 기본값으로 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${yyyy}-${mm}-${dd}`;
+            
+            document.getElementById('startDate').value = formattedDate;
+            document.getElementById('startDate').min = formattedDate; // 과거 날짜 선택 방지
+        });
+        
+        function submitForm(event) {
+            event.preventDefault(); // 기본 폼 제출 막기
+            
+            const start = document.getElementById("start").value.trim();
+            const destination = document.getElementById("destination").value.trim();
+            const days = document.getElementById("days").value.trim();
+            const theme = document.getElementById("theme").value.trim();
+            const startDate = document.getElementById("startDate").value.trim();
+            
+            if (!start || !destination || !days || !theme || !startDate) {
+                alert("모든 항목을 입력해주세요!");
+                return;
+            }
+            
+            // travel.html로 GET 파라미터 붙여서 이동
+            const queryParams = `start=${encodeURIComponent(start)}&destination=${encodeURIComponent(destination)}&days=${encodeURIComponent(days)}&theme=${encodeURIComponent(theme)}&startDate=${encodeURIComponent(startDate)}`;
+            window.location.href = `/chat/travel?${queryParams}`;
+        }
+    </script>
+</body>
+</html>

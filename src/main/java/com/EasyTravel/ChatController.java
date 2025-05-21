@@ -20,7 +20,9 @@ import java.time.Duration;
 @RequestMapping("/api/chat")
 public class ChatController {
 
-    
+
+	// api 키 삽입 장소
+	
 
     @PostMapping
     public String chat(@RequestBody Map<String, String> requestData) {
