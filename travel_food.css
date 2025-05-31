@@ -1,0 +1,335 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* 상단 바 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6b8e23;
+    color: white;
+    padding: 20px 30px;
+  }
+  
+  /* 로고 */
+  .logo a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* 네비게이션 리스트 구조 개선 */
+  .nav-links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 25px;
+  }
+  
+  .nav-list li {
+    display: flex;
+  }
+  
+  /* 버튼 디자인 */
+  .nav-button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 8px;
+  }
+  
+  .nav-button:hover {
+    color: #96c734de;
+    background-color: white;
+  }
+  
+  .nav-button:focus {
+    outline: none;
+  }
+  
+
+
+
+/* 검색창 */
+.search-container {
+    padding: 20px 40px;
+    text-align : center;
+}
+
+#search-input {
+    width: 200px;
+    padding: 12px;
+    font-size: 14px;
+    text-align : center;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #6b8e23;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left:5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #96c734de;
+}
+
+/* 숙박 정보 카드 */
+.hotel-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    justify-content: center;
+}
+
+.hotel-item {
+    background-color: white;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 8px;
+    width: 250px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hotel-item:hover {
+    transform: translateY(-10px); /* 호버 시 카드 위로 부드럽게 올라가는 효과 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 더 강하게 */
+}
+
+.hotel-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.hotel-item h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.hotel-item p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* 배경 이미지 */
+.background-section {
+    background-image: url('hotel-background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1; /* 가장 위에 위치 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* 반투명 배경 */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    transition: color 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#hotelImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#hotelName {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#hotelAddress, #hotelRating, #hotelDescription {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+}
+
+/* 로그인 버튼 */
+.login-btn {
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.login-btn:hover {
+    color: #96c734de; /* 배경색과 동일한 색으로 변경 */
+    background-color: white; /* 배경색을 흰색으로 변경 */
+}
+
+/* 생략된 공통 스타일은 기존 유지 */
+
+/* 맛집 리스트 */
+#restaurant-list {
+    width: 48%;
+    overflow-y: auto;
+    height: 400px;
+    padding: 20px;
+    margin-right: 50px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* 전체 정보 영역 (텍스트 + 별점/리뷰) */
+
+
+.info-text strong {
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+}
+
+.info-text p {
+    font-size: 13px;
+    color: #777;
+    max-height: 35px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;  /* 최대 2줄로 제한 */
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+
+.info-text button {
+    padding: 8px 12px;
+    background-color: #6b8e23;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.info-text button:hover {
+    background-color: #96c734de;
+}
+
+.restaurant-item {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    align-items: flex-start;
+    min-height: 150px;
+    max-height: 170px; /* 높이 제한 */
+    overflow: hidden;
+}
+
+.restaurant-image {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.restaurant-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 전체 정보 영역 (텍스트 + 별점/리뷰) */
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* 왼쪽: 이름, 주소, 버튼 */
+.info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 230px;
+    flex-shrink: 0;
+}
+
+
+/* 지도 영역 */
+#map {
+    width: 48%;
+    height: 400px;
+    margin-left: 70px;
+}
+
+/* 전체 컨테이너 */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
