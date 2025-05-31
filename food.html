@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맛집 검색</title>
+    <link rel="stylesheet" href="travel_food.css">
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=aea8f357fcc7366cb7e5a346e22782c5&libraries=services"></script>
+</head>
+<body>
+    <!-- 상단 바 -->
+    <header>
+        <div class="logo">
+            <a href="travel.html">
+                <h1>EasyTravel</h1>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <ul class="nav-list">
+                <li><button class="nav-button" onclick="window.location.href='AI.html'">AI여행</button></li>
+                <li><button class="nav-button" onclick="window.location.href='hotel.html'">호텔</button></li>
+                <li><button class="nav-button" onclick="window.location.href='food.html'">맛집</button></li>
+                <li><button class="nav-button" onclick="wondow.location.href='board.html'">여행리뷰</button></li>
+            </ul>
+        </nav>
+        <button class="login-btn">로그인</button>
+    </header>
+
+    <!-- 검색창 -->
+    <div class="search-container">
+        <div id="search">
+            <input type="text" id="search-input" placeholder="검색할 맛집을 입력하세요" />
+            <button onclick="searchPlace()">검색</button>
+        </div>
+    </div>
+
+    <!-- 지도와 맛집 리스트를 감싸는 컨테이너 -->
+    <div class="container">
+        <div id="map"></div>
+        <div id="restaurant-list"></div>
+    </div>
+
+    <script src="food.js"></script>
+</body>
+</html>
