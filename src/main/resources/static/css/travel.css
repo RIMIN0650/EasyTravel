@@ -1,0 +1,225 @@
+/* 기본 스타일 */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* 상단 바 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6b8e23;
+    color: #fefefe;
+    padding: 20px 40px;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+/* 네비게이션 영역 */
+.nav-links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 25px;
+}
+
+.nav-list li {
+    display: flex;
+}
+
+/* 네비게이션 버튼 */
+.nav-button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 8px;
+}
+
+.nav-button:hover {
+    color: #87b32de8;
+    background-color: white;
+}
+
+.nav-button:focus {
+    outline: none;
+}
+
+
+
+.login-btn {
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    color: #d0f0f6;
+    background-color: #8ab632e9;
+}
+
+.banner-button{
+    color:black;
+}
+
+
+/* 메인 배너 */
+.main-banner {
+    background-image: url('/static/images/background.png');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+
+.main-banner::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.banner-text {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-text h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.banner-text p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.banner-btn {
+    padding: 12px 24px;
+    background-color: #6b8e23;;
+    color: #fefefe;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.banner-btn:hover {
+    background-color: #96c734de;
+}
+
+/* 서비스 카드 섹션 */
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 50px 40px;
+    background-color: white;
+}
+
+.service-card {
+    background-color: #f1f1f1;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 16px;
+    color: #555;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 챗봇 */
+.chat-window {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+    width: 300px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 300px;
+    margin-bottom: 10px;
+}
+
+#chat-input {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+#send-btn {
+    background-color: #6b8e23;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#send-btn:hover {
+    background-color: #96c734de;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .main-banner h2 {
+        font-size: 32px;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+}

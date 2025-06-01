@@ -137,7 +137,7 @@
       </table>
 
       <div class="button-group d-flex justify-content-between">
-        <button type="button" id="add-prefer-btn" class="btn-custom">선호도 조사</button>
+        <button type="button" id="back-to-main-btn" class="btn-custom">메인 페이지로</button>
         <button type="button" id="post-upload-btn" class="btn-custom">글쓰기</button>
       </div>
     </div>
@@ -152,8 +152,8 @@
         location.href = "/post/upload";
       });
 
-      $("#add-prefer-btn").on("click", function () {
-        location.href = "/user/preference/store";
+      $("#back-to-main-btn").on("click", function () {
+        location.href = "/main/home";
       });
     });
   </script>

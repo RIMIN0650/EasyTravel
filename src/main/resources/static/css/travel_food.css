@@ -11,24 +11,38 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #3b5998;
+    background-color: #6b8e23;
     color: white;
     padding: 20px 30px;
-}
-
-/* 로고 */
-.logo a {  /* 링크 스타일을 추가 */
-    text-decoration: none;  /* 밑줄 제거 */
-    color: white;  /* 링크 색상 변경 */
-}
-
-/* 네비게이션 버튼들 */
-.nav-links {
+  }
+  
+  /* 로고 */
+  .logo a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* 네비게이션 리스트 구조 개선 */
+  .nav-links {
+    flex: 1;
     display: flex;
-    gap: 15px;
-}
-
-.nav-button {
+    justify-content: center;
+  }
+  
+  .nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 25px;
+  }
+  
+  .nav-list li {
+    display: flex;
+  }
+  
+  /* 버튼 디자인 */
+  .nav-button {
     background-color: transparent;
     border: none;
     padding: 10px 20px;
@@ -36,16 +50,20 @@ header {
     color: white;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
-}
-
-.nav-button:hover {
-    color: #3b5998;
+    border-radius: 8px;
+  }
+  
+  .nav-button:hover {
+    color: #96c734de;
     background-color: white;
-}
-
-.nav-button:focus {
+  }
+  
+  .nav-button:focus {
     outline: none;
-}
+  }
+  
+
+
 
 /* 검색창 */
 .search-container {
@@ -64,7 +82,7 @@ header {
 
 button {
     padding: 10px 15px;
-    background-color: #3b5998;
+    background-color: #6b8e23;
     color: white;
     border: none;
     cursor: pointer;
@@ -74,7 +92,7 @@ button {
 }
 
 button:hover {
-    background-color: #2d4373;
+    background-color: #96c734de;
 }
 
 /* 숙박 정보 카드 */
@@ -198,7 +216,7 @@ button:hover {
 }
 
 .login-btn:hover {
-    color: #3b5998; /* 배경색과 동일한 색으로 변경 */
+    color: #96c734de; /* 배경색과 동일한 색으로 변경 */
     background-color: white; /* 배경색을 흰색으로 변경 */
 }
 
@@ -245,7 +263,7 @@ button:hover {
 
 .info-text button {
     padding: 8px 12px;
-    background-color: #3b5998;
+    background-color: #6b8e23;
     color: white;
     border: none;
     border-radius: 5px;
@@ -254,7 +272,7 @@ button:hover {
 }
 
 .info-text button:hover {
-    background-color: #2d4373;
+    background-color: #96c734de;
 }
 
 .restaurant-item {

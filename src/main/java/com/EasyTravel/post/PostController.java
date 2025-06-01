@@ -35,7 +35,7 @@ public class PostController {
 	
 	
 	// 메인 페이지
-	@GetMapping("/post/home")
+	@GetMapping("/main/board")
 	public String managerJoin(Model model) {
 		
 		// 지역 리스트 불러오기

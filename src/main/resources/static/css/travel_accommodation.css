@@ -1,11 +1,9 @@
-
-
 /* 상단 바 */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #3b5998;
+    background-color: #6b8e23;
     color: white;
     padding: 20px 30px;
 }
@@ -33,7 +31,7 @@ header {
 }
 
 .nav-button:hover {
-    color: #3b5998;
+    color: #96c734de;
     background-color: white;
 }
 
@@ -54,5 +52,5 @@ header {
 
 .login-btn:hover {
     background-color: white;
-    color: #3b5998;
+    color: #96c734de;
 }
