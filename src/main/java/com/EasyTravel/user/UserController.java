@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 
@@ -24,6 +27,16 @@ public class UserController {
 	public String userPreference() {
 		return "/user/userPrefer";
 	}
-
+	
+	// 로그아웃 기능
+	@GetMapping("/user/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("userId");
+		session.removeAttribute("userName");
+		
+		return  "redirect:/main/home";
+	}
 	
 }

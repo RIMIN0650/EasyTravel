@@ -1,8 +1,10 @@
 package com.EasyTravel.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.EasyTravel.common.FileManager;
 
@@ -19,4 +21,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		//.addResourceLocations("file://" + FileManager.FILE_UPLOAD_PATH + "/");
 	}
 	// 웹 어플리케이션에서 업로드된 이미지 파일을 URL을 통해 접근할 수 있도록 함
+	
 }

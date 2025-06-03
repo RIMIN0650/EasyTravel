@@ -54,3 +54,20 @@ header {
     background-color: white;
     color: #96c734de;
 }
+
+
+
+.logout-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.logout-btn:hover {
+    background-color: white;
+    color: #96c734de;
+}

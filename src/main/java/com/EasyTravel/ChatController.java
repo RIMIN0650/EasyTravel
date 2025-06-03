@@ -22,7 +22,7 @@ public class ChatController {
 
 	
 	// private final Ope
-
+	
 
     @PostMapping
     public String chat(@RequestBody Map<String, String> requestData) {

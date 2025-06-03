@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,7 +57,7 @@ public class UserRestController {
 	// 사용자 로그인
 	@PostMapping("/user/login")
 	public Map<String, String> userLogin(@RequestParam("id") String id, @RequestParam("pw") String pw
-										, HttpServletRequest request){
+										, HttpServletRequest request, Model model){
 		
 		User user = userService.findUser(id, pw);
 		
@@ -68,7 +69,6 @@ public class UserRestController {
 			
 			session.setAttribute("userId",  user.getId());
 			session.setAttribute("userName",  user.getUserName());
-			
 			resultMap.put("result",  "success");
 		} else {
 			resultMap.put("result",  "fail");

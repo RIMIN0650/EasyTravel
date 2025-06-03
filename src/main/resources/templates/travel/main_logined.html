@@ -22,7 +22,9 @@
         </nav>
         
 		
-		<button class="login-btn" onclick="window.location.href='/user/login'">로그인</button>
+		<span th:text="${userName} + '님 환영합니다!'"></span>   &nbsp;&nbsp;&nbsp;
+		
+		<button class="logout-btn" onclick="window.location.href='/main/home'">로그아웃</button>
     </header>
 
     <!-- 메인 배너 섹션 -->
@@ -63,4 +65,34 @@
 
     <script src="travel.js"></script>
 </body>
+
+
+
+<script>
+		$(document).ready(function(){
+			
+			$("#logoutBtn").on("click", function(){
+			
+				$.ajax({
+					type:"get"
+					, url:"/user/logout"
+					, success:function(){
+						location.href="/main/home"
+					}
+				});
+				
+				
+			});
+			
+			
+			
+		});
+		
+		
+	</script>
+
+
+
+
+
 </html>
