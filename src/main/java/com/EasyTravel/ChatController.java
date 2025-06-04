@@ -1,31 +1,49 @@
 package com.EasyTravel;
 
-import org.springframework.web.bind.annotation.*;
-import com.theokanning.openai.service.OpenAiService;
-import com.theokanning.openai.completion.chat.*;
-import org.springframework.web.client.RestTemplate;
-import org.json.*;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.EasyTravel.preference.domain.Preference;
+import com.EasyTravel.preference.service.PreferenceService;
+import com.theokanning.openai.completion.chat.ChatCompletionChoice;
+import com.theokanning.openai.completion.chat.ChatCompletionRequest;
+import com.theokanning.openai.completion.chat.ChatMessage;
+import com.theokanning.openai.service.OpenAiService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
-
+	
+	@Autowired
+	private PreferenceService preferenceService;
 	
 	// private final Ope
 	
 
     @PostMapping
-    public String chat(@RequestBody Map<String, String> requestData) {
+    public String chat(@RequestBody Map<String, String> requestData, HttpSession session) {
         String start = requestData.get("start");
         String destination = requestData.get("destination");
         String days = requestData.get("days");
@@ -40,9 +58,20 @@ public class ChatController {
                 System.out.println("날짜 파싱 오류: " + e.getMessage());
             }
         }
+      
+        
+        int id = (Integer)session.getAttribute("userId");
+        Preference preference = preferenceService.findPreference(id);
 
-        String userMessage = String.format("출발지는 %s, 목적지는 %s, 여행 기간은 %s일, 테마는 %s 이야. 이에 맞는 여행 장소 리스트를 출발지와 목적지 사이에 가능한 균등하게 분배되게 추천해줘.", start, destination, days, theme);
+        String userMessage = String.format(
+            "출발지는 %s, 목적지는 %s, 여행 기간은 %s일, 테마는 %s 이야. 이에 맞는 여행 장소 리스트를 출발지와 목적지 사이에 가능한 균등하게 분배되게 추천해줘. " +
+            "사용자 취향은 첫 번째: %s, 두 번째: %s, 세 번째: %s, 기타: %s 이야.",
+            start, destination, days, theme,
+            preference.getFirst(), preference.getSecond(), preference.getThird(), preference.getEtcetra()
+        );
 
+        
+        
         System.out.println("📝 생성된 userMessage: " + userMessage);
 
         List<String> suggestedLocations = getSuggestedLocations(userMessage);
