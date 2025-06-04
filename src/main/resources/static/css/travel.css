@@ -216,17 +216,21 @@ header {
     font-size: 16px;
     border-radius: 20px;
     border: 1px solid #ccc;
+    margin-left: 20px;
 }
 
 #send-btn {
     background-color: #6b8e23;
     color: white;
     border: none;
-    padding: 10px;
-    border-radius: 50%;
+    padding: 10px 20px;  
+    width: 280px;
+    border-radius: 5px;  
     cursor: pointer;
-    margin-left: 10px;
+    margin-top: 7px;
+    margin-left: 12px;
 }
+
 
 #send-btn:hover {
     background-color: #96c734de;
