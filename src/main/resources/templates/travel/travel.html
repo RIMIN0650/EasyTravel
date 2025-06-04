@@ -509,19 +509,15 @@
                         if (mapData.length === 0) {
                             console.warn("지도 데이터가 비어있습니다.");
                             
-                            // 날짜 관련 경고 메시지 추가
-                            const today = new Date();
-                            const selectedDate = new Date(startDate);
-                            if (selectedDate > today) {
-                                chatBox.insertAdjacentHTML('afterbegin', `
-                                    <div class="date-warning">
-                                        ⚠️ 미래 날짜(${formatDate(startDate)})에 대한 정보를 불러오는데 문제가 있습니다. 
-                                        오늘 날짜로 다시 시도하거나, 가까운 미래 날짜를 선택해보세요.
-                                    </div>
-                                `);
-                            }
+                            // API 오류 메시지 표시
+                            chatBox.insertAdjacentHTML('afterbegin', `
+                                <div class="date-warning">
+                                    ⚠️ API 오류로 지도에 마커를 표시할 수 없습니다.
+                                </div>
+                            `);
                             return;
                         }
+
                         
                         // 새 마커 추가
                         const markerLocations = [];

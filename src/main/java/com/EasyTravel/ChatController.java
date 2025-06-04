@@ -375,12 +375,14 @@ public class ChatController {
             "  <strong>숙박:</strong> <span>해운대 근처 호텔</span>\n" +
             "</div>\n\n" +
             
-            "4. 스타일은 CSS로 나중에 적용할 예정이니, HTML 구조만 일관되게 유지해줘.\n" +
-            "5. 다른 설명 없이 HTML만 출력해줘.\n\n";
+			"4.교통은 이전장소에서 해당 장소로 이동하기 위한 구체적인 교통수단과 방법 설명" +
+			"5.스타일은 CSS로 나중에 적용할 예정이니, HTML 구조만 일관되게 유지해줘.\n" +
+			"6.다른 설명 없이 HTML만 출력해줘.\n\n";
+
             
 
         ChatCompletionRequest request = ChatCompletionRequest.builder()
-                .model("gpt-4o-mini")
+                .model("gpt-4o")
                 .messages(Collections.singletonList(new ChatMessage("user", finalPrompt)))
                 .maxTokens(2000)
                 .temperature(0.7)
