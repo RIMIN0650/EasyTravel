@@ -41,7 +41,6 @@ public class ChatController {
 	
 	// private final Ope
 	
-
     @PostMapping
     public String chat(@RequestBody Map<String, String> requestData, HttpSession session) {
         String start = requestData.get("start");

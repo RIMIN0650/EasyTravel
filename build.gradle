@@ -8,6 +8,18 @@ plugins {
 group = 'com.EasyTravel'
 version = '0.0.1-SNAPSHOT'
 
+springBoot {
+	mainClass = 'com.EasyTravel.EasyTravelApplication'
+}
+
+bootJar {
+	enabled = false
+}
+
+bootWar {
+	enabled = true
+}
+
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
@@ -19,6 +31,16 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
+
+sourceSets {
+	main {
+		resources {
+			srcDirs = ['src/main/resources']
+			includes = ['**/*.html']
+		}
+	}
+}
+
 
 repositories {
 	mavenCentral()

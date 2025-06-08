@@ -31,4 +31,10 @@ public class MainController {
 		
 		return  "/travel/main_logined";
 	}
+	
+	@GetMapping("/")
+	public String redirectToMain() {
+		return "redirect:/main/home";
+	}
+	
 }
