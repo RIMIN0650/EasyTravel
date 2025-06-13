@@ -30,14 +30,13 @@ spring:
 
 # API 설정 (기본값들, secret 파일에서 오버라이드됨)
 api:
-  google-key: ${GOOGLE_API_KEY:}
-  openai-key: ${OPENAI_API_KEY:}
-  weather-key: ${WEATHER_API_KEY:}
-
+  google-key: AIzaSyDgi6POr_cYuSaqVnsXpOEgMpinSDI12DU
+  openai-key: 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
+  weather-key: 9b577086f3680588d393326fafc5c98f
 # GPT 설정
 gpt:
   api:
-    key: ${OPENAI_API_KEY:}
+    key: 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
     model: ${GPT_MODEL:gpt-4o-mini}
     timeout: ${GPT_TIMEOUT:60}
     itinerary-model: ${GPT_ITINERARY_MODEL:gpt-4o}
