@@ -8,10 +8,17 @@ plugins {
 group = 'com.EasyTravel'
 version = '0.0.1-SNAPSHOT'
 
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
 springBoot {
 	mainClass = 'com.EasyTravel.EasyTravelApplication'
 }
 
+// WAR 배포 설정
 bootJar {
 	enabled = false
 }
@@ -20,73 +27,59 @@ bootWar {
 	enabled = true
 }
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
-
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
 }
 
-sourceSets {
-	main {
-		resources {
-			srcDirs = ['src/main/resources']
-			includes = ['**/*.html']
-		}
-	}
-}
-
-
 repositories {
 	mavenCentral()
-	maven { url 'https://jitpack.io' } // JitPack 저장소 추가 (필수)
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+	// Spring Boot 핵심 의존성
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// MyBatis (JPA와 함께 사용)
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// 데이터베이스 드라이버
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// OpenAI API
+	implementation 'com.theokanning.openai-gpt3-java:api:0.18.1'
+	implementation 'com.theokanning.openai-gpt3-java:service:0.18.1'
+	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+	// JSON 처리
+	implementation 'org.json:json:20230227'
+
+	// JSP 및 JSTL (Thymeleaf 대신 JSP 사용시)
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// 개발 도구
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+	// SQL 로깅 (P6Spy)
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
+
+	// 운영 환경 (WAR 배포시)
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+	// 테스트 의존성
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
-	
-	
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	
-	
-	
-	
-	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
-	
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	//implementation 'com.github.TheoKanning:openai-java:0.18.1'
-	implementation 'com.theokanning.openai-gpt3-java:api:0.18.1'
-    implementation 'com.theokanning.openai-gpt3-java:service:0.18.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
-	
-    
-	implementation 'org.json:json:20210307'
-	
 }
 
 tasks.named('test') {

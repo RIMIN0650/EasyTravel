@@ -17,6 +17,11 @@ public class MainController {
 	public String createPlan() {
 		return "/travel/form";
 	}
+
+	@GetMapping("/main/chatbot")
+	public String getChatBotPage() {
+		return "/chatbot/chatbot";
+	}
 	
 	@GetMapping("/main/chat/result")
 	public String returnPlan() {

@@ -1,5 +1,5 @@
 spring:
-  jpa: 
+  jpa:
     show-sql: true
     hibernate:
       ddl-auto: none
@@ -7,13 +7,13 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
-      hibernate: 
+      hibernate:
         format_sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/easy_travel
+    url: jdbc:mysql://localhost:3306/easytravel_db
     username: root
-    password: root
+    password: topsa1566@@
   mvc:
     static-path-pattern: /static/**
   thymeleaf:
@@ -25,7 +25,26 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  profiles:
+    include: secret  # application-secret.yml 파일을 포함
 
+# API 설정 (기본값들, secret 파일에서 오버라이드됨)
 api:
-  google-key: ${GOOGLE_API_KEY}
-  openai-key: ${OPENAI_API_KEY}
+  google-key: ${GOOGLE_API_KEY:}
+  openai-key: ${OPENAI_API_KEY:}
+  weather-key: ${WEATHER_API_KEY:}
+
+# GPT 설정
+gpt:
+  api:
+    key: ${OPENAI_API_KEY:}
+    model: ${GPT_MODEL:gpt-4o-mini}
+    timeout: ${GPT_TIMEOUT:60}
+    itinerary-model: ${GPT_ITINERARY_MODEL:gpt-4o}
+
+# 외부 API URL 설정
+external:
+  google:
+    geocode-url: https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s
+  weather:
+    forecast-url: https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&appid=%s&units=metric&lang=kr

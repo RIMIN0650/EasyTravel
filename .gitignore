@@ -35,3 +35,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# 중요: 보안 관련 파일들
+application-secret.yml
+application-secret.yaml
+application-local.yml
+application-local.yaml
+*.env
+.env
+.env.local
+.env.production
+

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyTravel 챗봇</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chatbot-container {
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chatbot-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .chatbot-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e1e8ed;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            order: 1;
+        }
+
+        .message.bot .message-avatar {
+            background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .typing-dots {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .welcome-message h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .quick-question {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-question:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 스크롤바 스타일링 */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .chatbot-container {
+                width: 95%;
+                height: 90vh;
+                border-radius: 15px;
+            }
+
+            .chatbot-header {
+                padding: 15px;
+            }
+
+            .chatbot-header h1 {
+                font-size: 20px;
+            }
+
+            .clear-btn {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin-top: 10px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .chat-input {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="chatbot-container">
+    <div class="chatbot-header">
+        <h1>🧳 EasyTravel 챗봇</h1>
+        <p>여행에 관한 모든 것을 물어보세요!</p>
+        <button class="clear-btn" onclick="clearChat()">대화 초기화</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+        <div class="welcome-message" id="welcomeMessage">
+            <h3>안녕하세요! 👋</h3>
+            <p>EasyTravel 챗봇입니다. 여행 계획, 관광지 정보, 교통편, 숙박 등<br>
+                여행과 관련된 모든 질문에 답해드릴게요!</p>
+
+            <div class="quick-questions">
+                <div class="quick-question" onclick="sendQuickQuestion('서울 3박 4일 여행 코스 추천해줘')">
+                    서울 여행 코스 추천
+                </div>
+                <div class="quick-question" onclick="sendQuickQuestion('제주도 맛집 추천해줘')">
+                    제주도 맛집 추천
+                </div>
+                <div class="quick-question" onclick="sendQuickQuestion('해외여행 준비물 체크리스트')">
+                    해외여행 준비물
+                </div>
+                <div class="quick-question" onclick="sendQuickQuestion('부산 당일치기 코스 추천')">
+                    부산 당일치기 코스
+                </div>
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="message bot">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <div class="chat-input-wrapper">
+            <input type="text" class="chat-input" id="chatInput"
+                   placeholder="여행에 관한 질문을 입력하세요..."
+                   onkeypress="handleKeyPress(event)">
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                ➤
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let isLoading = false;
+
+    // 페이지 로드 시 대화 기록 불러오기
+    window.onload = function() {
+        loadChatHistory();
+    };
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter' && !isLoading) {
+            sendMessage();
+        }
+    }
+
+    function sendQuickQuestion(question) {
+        document.getElementById('chatInput').value = question;
+        sendMessage();
+    }
+
+    async function sendMessage() {
+        const chatInput = document.getElementById('chatInput');
+        const message = chatInput.value.trim();
+
+        if (!message || isLoading) return;
+
+        // 웰컴 메시지 숨기기
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        if (welcomeMessage) {
+            welcomeMessage.style.display = 'none';
+        }
+
+        // 사용자 메시지 추가
+        addMessage('user', message);
+        chatInput.value = '';
+
+        // 로딩 상태 설정
+        setLoading(true);
+        showTypingIndicator();
+
+        try {
+            const response = await fetch('/api/chatbot/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            const data = await response.json();
+
+            hideTypingIndicator();
+
+            if (data.success) {
+                addMessage('bot', data.message);
+            } else {
+                addMessage('bot', data.message || '죄송합니다. 오류가 발생했습니다.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            hideTypingIndicator();
+            addMessage('bot', '네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    function addMessage(sender, content) {
+        const chatMessages = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+
+        const avatar = sender === 'user' ? '👤' : '🤖';
+
+        messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">${formatMessage(content)}</div>
+            `;
+
+        chatMessages.appendChild(messageDiv);
+        scrollToBottom();
+    }
+
+    function formatMessage(content) {
+        // 줄바꿈을 <br>로 변환
+        content = content.replace(/\n/g, '<br>');
+
+        // **볼드** 텍스트 처리
+        content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // *이탤릭* 텍스트 처리
+        content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        return content;
+    }
+
+    function showTypingIndicator() {
+        document.getElementById('typingIndicator').style.display = 'block';
+        scrollToBottom();
+    }
+
+    function hideTypingIndicator() {
+        document.getElementById('typingIndicator').style.display = 'none';
+    }
+
+    function setLoading(loading) {
+        isLoading = loading;
+        const sendBtn = document.getElementById('sendBtn');
+        const chatInput = document.getElementById('chatInput');
+
+        sendBtn.disabled = loading;
+        chatInput.disabled = loading;
+
+        if (loading) {
+            sendBtn.innerHTML = '⏳';
+            chatInput.placeholder = '답변을 기다리는 중...';
+        } else {
+            sendBtn.innerHTML = '➤';
+            chatInput.placeholder = '여행에 관한 질문을 입력하세요...';
+        }
+    }
+
+    function scrollToBottom() {
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function clearChat() {
+        if (!confirm('정말로 대화 기록을 모두 삭제하시겠습니까?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/chatbot/clear', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // 채팅 메시지 영역 초기화
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML = `
+                        <div class="welcome-message" id="welcomeMessage">
+                            <h3>안녕하세요! 👋</h3>
+                            <p>EasyTravel 챗봇입니다. 여행 계획, 관광지 정보, 교통편, 숙박 등<br>
+                            여행과 관련된 모든 질문에 답해드릴게요!</p>
+
+                            <div class="quick-questions">
+                                <div class="quick-question" onclick="sendQuickQuestion('서울 3박 4일 여행 코스 추천해줘')">
+                                    서울 여행 코스 추천
+                                </div>
+                                <div class="quick-question" onclick="sendQuickQuestion('제주도 맛집 추천해줘')">
+                                    제주도 맛집 추천
+                                </div>
+                                <div class="quick-question" onclick="sendQuickQuestion('해외여행 준비물 체크리스트')">
+                                    해외여행 준비물
+                                </div>
+                                <div class="quick-question" onclick="sendQuickQuestion('부산 당일치기 코스 추천')">
+                                    부산 당일치기 코스
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="typing-indicator" id="typingIndicator">
+                            <div class="message bot">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="typing-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('대화 기록 삭제 중 오류가 발생했습니다.');
+        }
+    }
+
+    async function loadChatHistory() {
+        try {
+            const response = await fetch('/api/chatbot/history', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            const data = await response.json();
+
+            if (data.success && data.messages && data.messages.length > 0) {
+                // 웰컴 메시지 숨기기
+                const welcomeMessage = document.getElementById('welcomeMessage');
+                if (welcomeMessage) {
+                    welcomeMessage.style.display = 'none';
+                }
+
+                // 이전 대화 기록 표시
+                data.messages.forEach(msg => {
+                    addMessage(msg.role === 'user' ? 'user' : 'bot', msg.content);
+                });
+            }
+        } catch (error) {
+            console.error('Error loading chat history:', error);
+        }
+    }
+</script>
+</body>
+</html>
