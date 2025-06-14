@@ -20,11 +20,11 @@ springBoot {
 
 // WAR 배포 설정
 bootJar {
-	enabled = false
+	enabled = true //잠깐 수정
 }
 
 bootWar {
-	enabled = true
+	enabled = false // 잠깐 수정
 }
 
 configurations {
